@@ -1,0 +1,18 @@
+{
+  "name": "xmltodanfe",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@nfewizard/danfe": "^1.0.2",
+    "danfe-simplificada": "^1.1.2",
+    "html-pdf-node": "^1.0.8",
+    "node-sped-nfe": "^1.2.52",
+    "webdanfe": "^1.0.0"
+  }
+}
