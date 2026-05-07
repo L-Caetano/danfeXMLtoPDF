@@ -235,20 +235,24 @@
     </table>
 
     <!-- Dados Adicionais -->
-    <div class="section-title">DADOS ADICIONAIS</div>
-    <div class="border flex" style="min-height: 80px;">
+<div class="section-title">DADOS ADICIONAIS</div>
+    <div class="border flex" style="min-height: 90px;">
         <div class="col" style="flex: 7;">
             <span class="label">INFORMAÇÕES COMPLEMENTARES</span>
-            <div style="font-size: 7.5pt; line-height: 1.3;">
-                {{informacoes_complementares}} {{observacao}}
+            <div style="font-size: 7pt; line-height: 1.2;">
+                <div>Inf. Contribuinte: {{informacoes_complementares}} {{observacao}}</div>
+  <div style="font-size: 7pt; line-height: 1.2;">
+                Inf. fisco: {{informacoes_fisco}}
+            </div>
+
+                <div style="margin-top: 4px;">Valor Aproximado dos Tributos: R$ {{valor_total_tributos}}</div>
             </div>
         </div>
         <div class="col" style="flex: 3;">
             <span class="label">RESERVADO AO FISCO</span>
+          
         </div>
-    </div>
-
-    <!-- Script para Geração do Código de Barras -->
+    </div>    <!-- Script para Geração do Código de Barras -->
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
     <script>
         var chaveBruta = "{{chave}}".replace(/[^0-9]/g, '');

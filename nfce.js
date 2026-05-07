@@ -1,11 +1,10 @@
-// Substitua o require antigo por este:
-const Danfe = require('./danfe-simplificada/index.js');
+const Danfe = require('./danfe-simplificada/nfce.js');
 const fs = require('fs');
 const html_to_pdf = require('html-pdf-node');
 
 async function createPDF() {
   try {
-    const xmlPath = 'arquivo3.xml';
+    const xmlPath = 'arquivoNfce.xml';
     const xmlContent = fs.readFileSync(xmlPath, 'utf8');
 
     if (!xmlContent.includes('<protNFe')) {
@@ -14,9 +13,9 @@ async function createPDF() {
     }
 
     console.log('Generating HTML from XML...');
-    const instance = Danfe.NfefromXML(xmlContent);
+    const instance = Danfe.NfcefromXML(xmlContent);
     console.log(JSON.stringify(instance, null, 2));
-    const html = instance.toHtml('./danfe-custom.hbs');
+    const html = instance.toHtml('./danfe-nfce.hbs');
 
     console.log('Converting HTML to PDF...');
 

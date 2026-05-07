@@ -377,14 +377,65 @@ function getTemplateData(nfe) {
   return data;
 }
 
+// Dentro da sua função createPDF ou getTemplateNfceData
+function getTemplateNfceData(nfe) {
+  // Extração manual dos itens para garantir que o array não esteja vazio
+  const itensBrutos = nfe.itens ? nfe.itens() : [];
+
+  // Mapeamento para garantir que as variáveis correspondam ao template
+  const itensMapeados = itensBrutos.map(item => ({
+    codigo: item.codigo(),
+    descricao: item.descricao(),
+    qtd: item.quantidade().toLocaleString('pt-BR', { minimumFractionDigits: 2 }),
+    un: item.unidade(),
+    valor_unit: item.valorUnitario().toLocaleString('pt-BR', { minimumFractionDigits: 2 }),
+    valor_total: item.valorTotal().toLocaleString('pt-BR', { minimumFractionDigits: 2 })
+  }));
+
+  return {
+    // Dados do Emitente [cite: 1, 17, 18, 19, 20]
+    emitente: {
+      nome: nfe.emitente().nome(),
+      cnpj: nfe.emitente().inscricaoNacional(),
+      ie: nfe.emitente().inscricaoEstadual(),
+      endereco: nfe.emitente().endereco().logradouro() + ", " + nfe.emitente().endereco().numero(),
+      bairro: nfe.emitente().endereco().bairro(),
+      cep: nfe.emitente().endereco().cep(),
+      municipio: nfe.emitente().endereco().municipio(),
+      uf: nfe.emitente().endereco().uf(),
+      fone: nfe.emitente().endereco().telefone()
+    },
+    // Itens e Totais 
+    itens: itensMapeados,
+    qtd_total_itens: itensMapeados.length,
+    valor_total_produtos: nfe.total().valorProdutos().toLocaleString('pt-BR', { minimumFractionDigits: 2 }),
+    valor_total_nota: nfe.total().valorNota().toLocaleString('pt-BR', { minimumFractionDigits: 2 }),
+
+    // Pagamentos [cite: 25]
+    pagamentos: nfe.pagamentos ? nfe.pagamentos().map(p => ({
+      forma: p.descricao(),
+      valor: p.valor().toLocaleString('pt-BR', { minimumFractionDigits: 2 })
+    })) : [],
+
+    // Dados Fiscais [cite: 8, 11, 13, 31]
+    chave: nfe.chave().replace(/\s/g, ''),
+    numero: nfe.nrNota(),
+    serie: nfe.serie(),
+    protocolo: nfe.protocolo(),
+    data_emissao: new Date(nfe.dataEmissao()).toLocaleString('pt-BR'),
+    data_protocolo: new Date(nfe.dataHoraRecebimento()).toLocaleString('pt-BR'),
+    informacoes_complementares: nfe.informacoesComplementares(),
+    qrCode: nfe.qrCode ? nfe.qrCode() : ''
+  };
+}
 /**
- * Retorna modelo Danfe de acordo com objeto <nfe> especificado.
+ * Retorna modelNfeo Danfe de acordo com objeto <nfe> especificado.
  *
  * @param      {<type>}  nfe     djf-nfe
  * @param      {string}  logo
  * @return     {Object}  { description_of_the_return_value }
  */
-function model(nfe, logo = "") {
+function modelNfe(nfe, logo = "") {
   return {
     /**
      * @param   {string}  customTemplate   Caminho para um template de NF customizado em .hbs (handlebars)
@@ -394,36 +445,47 @@ function model(nfe, logo = "") {
       renderHtml(getTemplateData(nfe), logo, customTemplate)
   }
 }
-
+function modelNfce(nfe, logo = "") {
+  return {
+    toHtml: (customTemplate = null) =>
+      renderHtml(getTemplateNfceData(nfe), logo, customTemplate)
+  }
+}
 /**
- * Retorna modelo Danfe de acordo com objeto  <nfe> especificado.
+ * Retorna modelNfeo Danfe de acordo com objeto  <nfe> especificado.
  *
  * @param      {object}  nfe    djf-nfe
  * @return     {<object>}
  */
 module.exports.fromNFe = function (nfe, logo = "") {
   if (!nfe || typeof nfe.nrNota !== 'function') {
-    return model(null)
+    return modelNfe(null)
   }
-  return model(nfe, logo)
+  return modelNfe(nfe, logo)
 }
 
 /**
- * Retorna modelo Danfe de acordo com <xml> especificado.
+ * Retorna modelNfeo Danfe de acordo com <xml> especificado.
  *
  * @param      {string}  xml
  * @param      {string}  logo
  * @return     {<object>}
  */
-module.exports.fromXML = function (xml, logo = "") {
+module.exports.NfefromXML = function (xml, logo = "") {
   if (!xml || typeof xml !== 'string') {
-    return model(null)
+    return modelNfe(null)
   }
-  return model(NFe(xml), logo)
+  return modelNfe(NFe(xml), logo)
 }
 
+module.exports.NfcefromXML = function (xml, logo = "") {
+  if (!xml || typeof xml !== 'string') {
+    return modelNfce(null)
+  }
+  return modelNfce(NFe(xml), logo)
+}
 /**
- * Retorna modelo Danfe de acordo com <filePath> especificado.
+ * Retorna modelNfeo Danfe de acordo com <filePath> especificado.
  *
  * @param      {string}  filePath
  * @param      {string}  logo
@@ -433,7 +495,7 @@ module.exports.fromFile = function (filePath, logo = "") {
   var content = ''
 
   if (!filePath || typeof filePath !== 'string') {
-    return model(null)
+    return modelNfe(null)
   }
 
   try {
