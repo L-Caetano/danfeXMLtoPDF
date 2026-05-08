@@ -2,20 +2,20 @@ const handlebars = require('handlebars')
 const NFe = require('djf-nfe')
 const fs = require('fs')
 const path = require('path')
+const QRCode = require('qrcode')
 
 const TEMPLATE_DANFE = path.join(__dirname, 'template-danfe.hbs')
 
-/**
- * Funções de Máscara e Formatação
- */
 function mascaraCPF(valor) {
   if (!valor) return ''
-  return valor.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")
+  const limpo = valor.toString().replace(/\D/g, '')
+  return limpo.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4")
 }
 
 function mascaraCNPJ(valor) {
   if (!valor) return ''
-  return valor.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5")
+  const limpo = valor.toString().replace(/\D/g, '')
+  return limpo.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})/, "$1.$2.$3/$4-$5")
 }
 
 function formataInscricaoNacional(numero) {
@@ -48,9 +48,6 @@ function formataMoeda(numero, decimais = 2) {
   })
 }
 
-/**
- * Helpers para extração de dados do djf-nfe
- */
 function dadosEntidade(entidade) {
   if (!entidade) return {}
   return {
@@ -62,21 +59,6 @@ function dadosEntidade(entidade) {
   }
 }
 
-function dadosEndereco(end) {
-  if (!end) return {}
-  const enderecoObj = typeof end.logradouro === 'function' ? end : end.endereco()
-  return {
-    endereco: enderecoObj.logradouro() + ", " + enderecoObj.numero(),
-    bairro: enderecoObj.bairro(),
-    cep: enderecoObj.cep(),
-    municipio: enderecoObj.municipio(),
-    uf: enderecoObj.uf()
-  }
-}
-
-/**
- * Processamento de Itens (Ajustado para evitar array vazio)
- */
 function extrairItens(nfe) {
   const itensArray = []
   const nrItens = nfe.nrItens ? nfe.nrItens() : 0
@@ -89,80 +71,83 @@ function extrairItens(nfe) {
       qtd: formataMoeda(row.quantidadeComercial(), 2),
       un: row.unidadeComercial(),
       valor_unit: formataMoeda(row.valorUnitario(), 2),
-      valor_total: formataMoeda(row.valorProdutos(), 2),
-      // Campos adicionais para NFe (DANFE Clássico)
-      ncm: row.ncm ? row.ncm() : '',
-      cfop: row.cfop ? row.cfop() : '',
-      icms: formataMoeda(row.valorIcms ? row.valorIcms() : 0)
+      valor_total: formataMoeda(row.valorProdutos(), 2)
     })
   }
   return itensArray
 }
 
-/**
- * Mapeamento de dados para NFC-e (Bobina Térmica)
- */
-function getTemplateNfceData(nfe) {
+async function getTemplateNfceData(nfe) {
   if (!nfe) return null
 
   const itensMapeados = extrairItens(nfe)
+  const emit = nfe.emitente()
+  const end = emit.endereco()
+
+  const formasPagamento = {
+    '01': 'Dinheiro',
+    '02': 'Cheque',
+    '03': 'Cartão de Crédito',
+    '04': 'Cartão de Débito',
+    '15': 'Boleto Bancário',
+    '90': 'Sem pagamento',
+    '99': 'Outros'
+  }
+
+  let qrCodeBase64 = ''
+  if (nfe.qrCode && nfe.qrCode()) {
+    try {
+      qrCodeBase64 = await QRCode.toDataURL(nfe.qrCode())
+    } catch (err) {
+      qrCodeBase64 = ''
+    }
+  }
 
   return {
-    emitente: Object.assign(dadosEntidade(nfe.emitente()), dadosEndereco(nfe.emitente())),
+    emitente: {
+      ...dadosEntidade(emit),
+      logradouro: end.logradouro(),
+      numero: end.numero(),
+      bairro: end.bairro(),
+      cep: end.cep().replace(/^(\d{5})(\d{3})$/, "$1-$2"),
+      municipio: end.municipio(),
+      uf: end.uf(),
+      telefone: end.telefone() ? `(${end.telefone().substring(0, 2)}) ${end.telefone().substring(2)}` : '',
+      endereco_completo: `${end.logradouro()}, ${end.numero()}, ${end.bairro()}. CEP:${end.cep().replace(/^(\d{5})(\d{3})$/, "$1-$2")}. ${end.municipio()}-${end.uf()}`
+    },
 
     itens: itensMapeados,
     qtd_total_itens: itensMapeados.length,
     valor_total_produtos: formataMoeda(nfe.total().valorProdutos()),
     valor_total_nota: formataMoeda(nfe.total().valorNota()),
     total_desconto: formataMoeda(nfe.total().valorDesconto ? nfe.total().valorDesconto() : 0),
-    valor_frete: formataMoeda(nfe.total().valorFrete ? nfe.total().valorFrete() : 0),
+    total_frete: formataMoeda(nfe.total().valorFrete ? nfe.total().valorFrete() : 0),
 
     pagamentos: nfe.pagamentos ? nfe.pagamentos().map(p => ({
-      forma: p.descricao(),
-      valor: formataMoeda(p.valor())
+      forma: formasPagamento[p.tPag()] || p.descricao() || 'Outros',
+      valor: formataMoeda(p.vPag ? p.vPag() : p.valor())
     })) : [],
 
-    destinatario: nfe.destinatario() && nfe.destinatario().nome()
-      ? Object.assign(dadosEntidade(nfe.destinatario()), { identificacao: formataInscricaoNacional(nfe.destinatario().inscricaoNacional()) })
-      : { nome: 'CONSUMIDOR NÃO IDENTIFICADO' },
+    destinatario: nfe.destinatario() && nfe.destinatario().inscricaoNacional()
+      ? {
+        nome: nfe.destinatario().nome(),
+        identificacao: formataInscricaoNacional(nfe.destinatario().inscricaoNacional())
+      }
+      : { nome: 'Consumidor não identificado' },
 
     chave: nfe.chave().replace(/\s/g, ''),
     numero: nfe.nrNota(),
-    serie: nfe.serie(),
+    serie: nfe.serie().toString().padStart(3, '0'),
     protocolo: nfe.protocolo(),
     data_emissao: formataData(nfe.dataEmissao()) + ' ' + formataHora(nfe.dataEmissao()),
     data_protocolo: formataData(nfe.dataHoraRecebimento()) + ' ' + formataHora(nfe.dataHoraRecebimento()),
     informacoes_complementares: nfe.informacoesComplementares(),
-    qrCode: nfe.qrCode ? nfe.qrCode() : ''
+    qrCode: qrCodeBase64
   }
 }
 
-/**
- * Mapeamento de dados para NFe (Folha A4)
- */
-function getTemplateData(nfe) {
-  if (!nfe) return null
-
-  return {
-    numero: nfe.nrNota(),
-    serie: nfe.serie(),
-    chave: nfe.chave(),
-    protocolo: nfe.protocolo() + ' - ' + formataData(nfe.dataHoraRecebimento()) + ' ' + formataHora(nfe.dataHoraRecebimento()),
-    natureza_operacao: nfe.naturezaOperacao(),
-    emitente: Object.assign(dadosEntidade(nfe.emitente()), dadosEndereco(nfe.emitente())),
-    destinatario: Object.assign(dadosEntidade(nfe.destinatario()), dadosEndereco(nfe.destinatario())),
-
-    data_emissao: formataData(nfe.dataEmissao()),
-    valor_total_nota: formataMoeda(nfe.total().valorNota()),
-    total_produtos: formataMoeda(nfe.total().valorProdutos()),
-    itens: extrairItens(nfe),
-    informacoes_complementares: nfe.informacoesComplementares()
-  }
-}
-
-function renderHtml(data, logo = "", customTemplate) {
+async function renderHtml(data, logo = "", customTemplate) {
   if (!data) return ''
-
   const pathToTemplate = (customTemplate && fs.existsSync(customTemplate))
     ? customTemplate
     : TEMPLATE_DANFE
@@ -171,30 +156,19 @@ function renderHtml(data, logo = "", customTemplate) {
   return handlebars.compile(template)({ ...data, emitente: { ...data.emitente, logo } })
 }
 
-/**
- * Exportação dos Módulos
- */
-module.exports.NfefromXML = function (xml, logo = "") {
-  if (!xml) return { toHtml: () => '' }
-  const nfe = NFe(xml)
-  return {
-    toHtml: (customTemplate = null) => renderHtml(getTemplateData(nfe), logo, customTemplate)
-  }
-}
-
 module.exports.NfcefromXML = function (xml, logo = "") {
-  if (!xml) return { toHtml: () => '' }
+  if (!xml) return { toHtml: async () => '' }
   const nfe = NFe(xml)
   return {
-    toHtml: (customTemplate = null) => renderHtml(getTemplateNfceData(nfe), logo, customTemplate)
+    toHtml: async (customTemplate = null) => {
+      const data = await getTemplateNfceData(nfe)
+      return renderHtml(data, logo, customTemplate)
+    }
   }
 }
 
 module.exports.fromFile = function (filePath, logo = "") {
-  if (!filePath || !fs.existsSync(filePath)) throw new Error('Arquivo não encontrado: ' + filePath)
+  if (!filePath || !fs.existsSync(filePath)) throw new Error('Arquivo não encontrado')
   const content = fs.readFileSync(filePath, 'utf8')
-  // Detecta se é NFCe (65) ou NFe (55) pela chave ou conteúdo
-  return content.includes('<mod>65</mod>')
-    ? module.exports.NfcefromXML(content, logo)
-    : module.exports.NfefromXML(content, logo)
+  return module.exports.NfcefromXML(content, logo)
 }

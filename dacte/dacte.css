@@ -1,0 +1,88 @@
+ * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 1.5mm;
+    color: #000;
+    font-size: 6pt;
+    line-height: 1.1;
+  }
+
+  .container {
+    width: 100%;
+    border: 0.6pt solid #000;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  td {
+    border: 0.4pt solid #000;
+    padding: 1px 2px;
+    vertical-align: top;
+    word-wrap: break-word;
+  }
+
+  .label {
+    display: block;
+    font-size: 4pt;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 1px;
+  }
+
+  .value {
+    display: block;
+    font-size: 6pt;
+  }
+
+  .center {
+    text-align: center;
+  }
+
+  .right {
+    text-align: right;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+
+  .title {
+    font-size: 13pt;
+    font-weight: bold;
+  }
+
+  .subtitle {
+    font-size: 5pt;
+  }
+
+  .section {
+    background: #EEE;
+    text-align: center;
+    font-size: 5pt;
+    font-weight: bold;
+    border-top: 0.4pt solid #000;
+    border-bottom: 0.4pt solid #000;
+    padding: 2px;
+  }
+
+  .tiny {
+    font-size: 4.5pt;
+  }
+
+  .mono {
+    font-family: monospace;
+  }
+
+  .h40 { height: 40px; }
+  .h55 { height: 55px; }
+  .h70 { height: 70px; }
+  .h90 { height: 90px; }
+
