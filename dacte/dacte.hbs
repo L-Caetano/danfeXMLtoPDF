@@ -10,198 +10,119 @@
 <div class="container">
 
   <!-- CABEÇALHO -->
-  <table>
-    <tr>
-      <td style="width: 38%;" class="h55">
-        <span class="value bold" style="font-size:8pt;">{{emitente.nome}}</span>
-        <span class="value">{{emitente.logradouro}}, {{emitente.numero}}</span>
-        <span class="value">{{emitente.bairro}}</span>
-        <span class="value">{{emitente.municipio}} - {{emitente.uf}} - CEP {{emitente.cep}}</span>
-        <span class="value">CNPJ/CPF: {{emitente.cnpj}}</span>
-        <span class="value">Insc. Estadual: {{emitente.ie}}</span>
-      </td>
+ <table>
 
-<td style="width: 62%; padding:0;">
-
-  <table style="height:100%; border-collapse:collapse; width:100%;">
-
-    <!-- ROW SUPERIOR -->
-    <tr>
-
-      <td style="width:50%;" class="center h40">
-
-        <div class="title">DACTE</div>
-
-        <div class="subtitle">
-          Documento Auxiliar do Conhecimento<br>
-          de Transporte Eletrônico
-        </div>
-
-      </td>
-
-      <td style="width:50%;" class="center h40">
-
-        <span class="label">MODAL</span>
-
-        <span class="value center bold">
-          RODOVIÁRIO
-        </span>
-
-      </td>
-
-    </tr>
-
-    <!-- ROW INFERIOR -->
-    <tr>
-
-      <td colspan="2" style="padding:0;">
-
-        <table style="width:100%; border-collapse:collapse;">
-
-          <tr>
-
-            <td style="width:10%;" class="h30 compact-cell">
-              <span class="label">MODELO</span>
-
-              <span class="value center bold">
-                57
-              </span>
-            </td>
-
-            <td style="width:12%;" class="h30 compact-cell">
-              <span class="label">SÉRIE</span>
-
-              <span class="value center bold">
-                {{#if serie}}
-                  {{serie}}
-                {{else}}
-                  &nbsp;
-                {{/if}}
-              </span>
-            </td>
-
-            <td style="width:18%;" class="h30 compact-cell">
-              <span class="label">NÚMERO</span>
-
-              <span class="value center bold">
-                {{#if numero}}
-                  {{numero}}
-                {{else}}
-                  &nbsp;
-                {{/if}}
-              </span>
-            </td>
-
-            <td style="width:8%;" class="h30 compact-cell">
-              <span class="label">FL</span>
-
-              <span class="value center">
-                1/1
-              </span>
-            </td>
-
-            <td style="width:27%;" class="h30 compact-cell">
-              <span class="label">DATA/HORA EMISSÃO</span>
-
-              <span class="value center">
-                {{#if dataEmissao}}
-                  {{dataEmissao}}
-                {{else}}
-                  &nbsp;
-                {{/if}}
-              </span>
-            </td>
-
-            <td style="width:25%;" class="h30 compact-cell">
-              <span class="label">INSC. SUFRAMA DEST.</span>
-
-              <span class="value center">
-                {{#if suframa}}
-                  {{suframa}}
-                {{else}}
-                  &nbsp;
-                {{/if}}
-              </span>
-            </td>
-
-          </tr>
-
-        </table>
-
-      </td>
-
-    </tr>
-
-  </table>
-
-</td>  </tr>
-</table>      </td>
-    </tr>
-  </table>
-
-<table>
   <tr>
 
-   <table>
-  <tr>
+    <!-- COLUNA ESQUERDA -->
+    <td style="width:38%; padding:0; vertical-align:top;">
 
-    <!-- CAMPOS -->
-    <td style="width:55%; padding:0;">
+      <table style="width:100%; border-collapse:collapse;">
 
-      <table style="height:100%; border-collapse:collapse; width:100%;">
-
+        <!-- EMITENTE -->
         <tr>
 
-          <td style="width:50%;" class="h40">
-            <span class="label">TIPO DO CT-E</span>
+          <td>
 
-            <span class="value bold center">
-              {{#if tipoCte}}
-                {{tipoCte}}
-              {{else}}
-                &nbsp;
-              {{/if}}
-            </span>
-          </td>
+            <table style="width:100%; border-collapse:collapse;">
 
-          <td style="width:50%;" class="h40">
-            <span class="label">TIPO DO SERVIÇO</span>
+              <tr>
+                <td class="center">
 
-            <span class="value bold center">
-              {{#if tipoServico}}
-                {{tipoServico}}
-              {{else}}
-                &nbsp;
-              {{/if}}
-            </span>
+                  {{#if logo}}
+                    <img
+                      src="{{logo}}"
+                      style="max-height:55px; max-width:120px;"
+                    />
+                  {{/if}}
+
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center bold">
+                  {{emitente.nome}}
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center tiny">
+                  {{emitente.endereco}}
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center tiny">
+                  {{emitente.municipio}} - {{emitente.uf}}
+                </td>
+              </tr>
+
+              <tr>
+                <td class="center tiny">
+                  {{emitente.telefone}}
+                </td>
+              </tr>
+
+            </table>
+
           </td>
 
         </tr>
 
+        <!-- TIPO CT-E / SERVIÇO -->
         <tr>
 
-          <td class="h40">
-            <span class="label">TOMADOR DO SERVIÇO</span>
+          <td style="width:50%;" class="h30">
+
+            <span class="label">
+              TIPO DO CT-E
+            </span>
 
             <span class="value bold center">
-              {{#if tomador.tipo}}
-                {{tomador.tipo}}
-              {{else}}
-                &nbsp;
-              {{/if}}
+              {{tipoCte}}
             </span>
+
           </td>
 
-          <td class="h40">
-            <span class="label">FORMA DE PAGAMENTO</span>
+          <td style="width:50%;" class="h30">
+
+            <span class="label">
+              TIPO DO SERVIÇO
+            </span>
 
             <span class="value bold center">
-              {{#if formaPagamento}}
-                {{formaPagamento}}
-              {{else}}
-                &nbsp;
-              {{/if}}
+              {{tipoServico}}
             </span>
+
+          </td>
+
+        </tr>
+
+        <!-- TOMADOR / PAGAMENTO -->
+        <tr>
+
+          <td class="h30">
+
+            <span class="label">
+              TOMADOR DO SERVIÇO
+            </span>
+
+            <span class="value bold center">
+              {{tomador.tipo}}
+            </span>
+
+          </td>
+
+          <td class="h30">
+
+            <span class="label">
+              FORMA DE PAGAMENTO
+            </span>
+
+            <span class="value bold center">
+              {{formaPagamento}}
+            </span>
+
           </td>
 
         </tr>
@@ -210,30 +131,186 @@
 
     </td>
 
-    <!-- CHAVE + BARCODE -->
-    <td style="width:45%;" class="center">
+    <!-- COLUNA DIREITA -->
+<td style="width:62%; padding:0; vertical-align:top;">
 
-      <span class="label">CHAVE DE ACESSO</span>
+  <table style="width:100%; border-collapse:collapse;">
 
-      <svg id="barcode"></svg>
+    <!-- LINHA DACTE -->
+    <tr >
 
-      <span class="value mono bold" style="font-size:8pt;">
-        {{chave}}
-      </span>
+      <!-- DACTE -->
+      <td
+        style="width:40%;"
+        class="center h40"
+      >
 
-      <div class="tiny" style="margin-top:3px;">
-        Consulta de autenticidade no portal nacional do CT-e
-      </div>
+        <div class="bold" style="font-size: large">
+          DACTE
+        </div>
 
-    </td>
+        <div class="tiny">
+          DOCUMENTO AUXILIAR DO
+          CONHECIMENTO DE TRANSPORTE
+          ELETRÔNICO
+        </div>
 
-  </tr>
-</table>    </td>
+      </td>
 
-  </tr>
+      <!-- MODAL -->
+      <td class="h40" >
+
+        <span class="label">
+          MODAL
+        </span>
+
+        <span class="value center bold">
+          {{modal}}
+        </span>
+
+      </td>
+
+    </tr>
 </table>
 
-<table>
+  <table style="width:100%; border-collapse:collapse;">
+    <!-- MODELO / SERIE / NUMERO / FL / DATA -->
+    <tr>
+
+      <!-- MODELO -->
+      <td class="h30">
+
+        <span class="label">
+          MODELO
+        </span>
+
+        <span class="value center bold">
+          {{modelo}}
+        </span>
+
+      </td>
+
+      <!-- SÉRIE -->
+      <td class="h30">
+
+        <span class="label">
+          SÉRIE
+        </span>
+
+        <span class="value center bold">
+          {{serie}}
+        </span>
+
+      </td>
+
+      <!-- NÚMERO -->
+      <td class="h30">
+
+        <span class="label">
+          NÚMERO
+        </span>
+
+        <span class="value center bold">
+          {{numero}}
+        </span>
+
+      </td>
+
+      <!-- FL -->
+      <td class="h30">
+
+        <span class="label">
+          FL
+        </span>
+
+        <span class="value center bold">
+          1/1
+        </span>
+
+      </td>
+
+      <!-- DATA -->
+      <td class="h30">
+
+        <span class="label">
+          DATA E HORA DE EMISSÃO
+        </span>
+
+        <span class="value center bold">
+          {{dataHoraEmissao}}
+        </span>
+
+      </td>
+ <td colspan="5" class="h30">
+
+        <span class="label">
+          INSC. SUFRAMA DO DESTINATÁRIO
+        </span>
+
+        <span class="value center bold">
+          {{inscricaoSuframa}}
+        </span>
+
+      </td>
+     
+
+    </tr>
+</table>
+
+  <table style="width:100%; border-collapse:collapse;">
+    <!-- BARCODE -->
+    <tr>
+
+      <td colspan="5" class="center h40">
+
+        <svg id="barcode"></svg>
+
+      </td>
+
+    </tr>
+
+    <!-- CHAVE -->
+    <tr>
+
+      <td colspan="5" class="center h30">
+
+        <span class="label">
+          CHAVE DE ACESSO
+        </span>
+
+        <span
+          class="value mono bold center"
+          style="font-size:7pt;"
+        >
+
+          {{chave}}
+
+        </span>
+
+      </td>
+
+    </tr>
+
+    <!-- CONSULTA -->
+    <tr>
+
+      <td colspan="5" class="center h30">
+
+        <span style="font-size:7pt;"
+>
+        Consulta de autenticidade no portal nacional do CT-e, no site da Sefaz Autorizadora,
+ou em http://www.cte.fazenda.gov.br       
+</span>
+
+      </td>
+
+    </tr>
+
+  </table>
+
+</td>  </tr>
+
+</table><table>
 
   <!-- PRIMEIRA ROW -->
   <tr>
@@ -533,9 +610,9 @@
       JsBarcode("#barcode", chaveBruta, {
         format: "CODE128",
         displayValue: false,
-        height: 35,
+        height: 30,
         width: 1.1,
-        margin: 0,
+        margin: 3,
         background: "transparent"
       });
     }

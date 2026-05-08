@@ -81,8 +81,12 @@
     font-family: monospace;
   }
 
+  .h30 { height: 30px; }
   .h40 { height: 40px; }
   .h55 { height: 55px; }
+
+  .h50 { height: 50px; }
+  .h60 { height: 60px; }
   .h70 { height: 70px; }
   .h90 { height: 90px; }
 
