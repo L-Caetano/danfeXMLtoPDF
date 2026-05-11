@@ -3,151 +3,158 @@
 <head>
     <meta charset="UTF-8">
     <style>
-        {{css}}
-        </style>
+       {{css}}   </style>
 </head>
 <body>
 
-    <!-- Canhoto -->
-    <div class="border flex" style="min-height: 80px;">
-    <div style="flex: 8; display: flex; flex-direction: column;">
-        <div style="flex: 1; padding: 5px; font-size: 7pt; border-bottom: 1px solid #000;">
-            RECEBEMOS DE <span class="bold">{{emitente.nome}}</span> OS PRODUTOS E/OU SERVIÇOS CONSTANTES DA NF-E INDICADA AO LADO.<br>
-            EMISSÃO: <span class="bold">{{data_emissao}}</span> VALOR TOTAL: <span class="bold">R$ {{valor_total_nota}}</span> DESTINATÁRIO: <span class="bold">{{destinatario.nome}}</span>
-        </div>
-        <div style="flex: 1; display: flex;">
-            <div class="col" style="flex: 3;"><span class="label">DATA DE RECEBIMENTO</span></div>
-            <div class="col" style="flex: 7;"><span class="label">IDENTIFICAÇÃO E ASSINATURA DO RECEBEDOR</span></div>
-        </div>
-    </div>
-    <div style="flex: 2; text-align: center; border-left: 1px solid #000; display: flex; flex-direction: column; justify-content: center;">
-        <div class="bold" style="font-size: 11pt;">NF-e</div>
-        <div class="bold">N°. {{numero}}</div>
-        <div class="bold">SÉRIE {{serie}}</div>
-    </div>
-</div>    <div style="height: 12px;"></div>
+    <table style="height: 80px;">
+        <tr>
+            <td style="width: 80%; padding: 0;">
+                <table style="height: 100%; border: none;">
+                    <tr>
+                        <td style="height: 50%; border: none; border-bottom: 1px solid #000; font-size: 7pt;">
+                            RECEBEMOS DE <span class="bold">{{emitente.nome}}</span> OS PRODUTOS E/OU SERVIÇOS CONSTANTES DA NF-E INDICADA AO LADO.<br>
+                            EMISSÃO: <span class="bold">{{data_emissao}}</span> VALOR TOTAL: <span class="bold">R$ {{valor_total_nota}}</span> DESTINATÁRIO: <span class="bold">{{destinatario.nome}}</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="height: 50%; border: none; padding: 0;">
+                            <table style="height: 100%; border: none;">
+                                <tr>
+                                    <td style="width: 30%; border: none; border-right: 1px solid #000;"><span class="label">DATA DE RECEBIMENTO</span></td>
+                                    <td style="width: 70%; border: none;"><span class="label">IDENTIFICAÇÃO E ASSINATURA DO RECEBEDOR</span></td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+            <td style="width: 20%; text-align: center; vertical-align: middle;">
+                <div class="bold" style="font-size: 11pt;">NF-e</div>
+                <div class="bold">N°. {{numero}}</div>
+                <div class="bold">SÉRIE {{serie}}</div>
+            </td>
+        </tr>
+    </table>
 
-    <!-- Cabeçalho Principal -->
-    <div class="border flex">
-        <div class="emitente-area">
-            <div class="bold" style="font-size: 11pt;">{{emitente.nome}}</div>
-            <div style="font-size: 8pt;">{{emitente.endereco}}, {{emitente.numero}}</div>
-            <div style="font-size: 8pt;">{{emitente.bairro}} - {{emitente.cep}}</div>
-            <div style="font-size: 8pt;">{{emitente.municipio}} - {{emitente.uf}}</div>
-            <div style="font-size: 8pt;">FONE: {{emitente.telefone}}</div>
-        </div>
-        <div class="danfe-area">
-            <div class="bold" style="font-size: 10pt;">DANFE</div>
-            <div style="font-size: 5pt; margin-bottom: 4px;">DOCUMENTO AUXILIAR DA NOTA FISCAL ELETRÔNICA</div>
-            <div class="border" style="width: 20px; margin: 0 auto; font-size: 11pt; font-weight: bold; padding: 1px;">{{operacao}}</div>
-            <div style="font-size: 7pt; margin-top: 2px;">0-ENTRADA<br>1-SAÍDA</div>
-            <div class="bold" style="font-size: 9pt; margin-top: 5px;">N°. {{numero}}<br>SÉRIE {{serie}}</div>
-            <div style="font-size: 7pt;">FOLHA 1/1</div>
-        </div>
-        <div class="barcode-area">
-            <svg id="barcode"></svg>
-            
-            <div class="chave-acesso-sub">
-                <span class="label">CHAVE DE ACESSO</span>
-                <div class="content" style="font-size: 8.5pt; letter-spacing: 0.5px;">{{chave}}</div>
-            </div>
-            
-            <div class="consulta-texto chave-acesso-sub">
-                CONSULTA DE AUTENTICIDADE NO PORTAL NACIONAL DA NF-E WWW.NFE.FAZENDA.GOV.BR/PORTAL OU NO SITE DA SEFAZ AUTORIZADORA
-            </div>
-        </div>
-    </div>
+    <div style="height: 12px;"></div>
 
-    <!-- Natureza / Protocolo -->
-    <div class="border flex">
-        <div class="col" style="flex: 1;"><span class="label">NATUREZA DA OPERAÇÃO</span><div class="content">{{natureza_operacao}}</div></div>
-        <div class="col" style="flex: 1;"><span class="label">PROTOCOLO DE AUTORIZAÇÃO DE USO</span><div class="content">{{protocolo}}</div></div>
-    </div>
-    
-    <div class="border flex">
-        <div class="col"><span class="label">INSCRIÇÃO ESTADUAL</span><div class="content">{{emitente.ie}}</div></div>
-        <div class="col"><span class="label">INSC.ESTADUAL DO SUBST. TRIB.</span><div class="content">{{emitente.ie_st}}</div></div>
-        <div class="col"><span class="label">CNPJ</span><div class="content">{{emitente.inscricao_nacional}}</div></div>
-    </div>
+    <table>
+        <tr>
+            <td style="width: 45%; text-align: center;">
+                <div class="bold" style="font-size: 11pt;">{{emitente.nome}}</div>
+                <div style="font-size: 8pt;">{{emitente.endereco}}, {{emitente.numero}}</div>
+                <div style="font-size: 8pt;">{{emitente.bairro}} - {{emitente.cep}}</div>
+                <div style="font-size: 8pt;">{{emitente.municipio}} - {{emitente.uf}}</div>
+                <div style="font-size: 8pt;">FONE: {{emitente.telefone}}</div>
+            </td>
+            <td style="width: 15%; text-align: center;">
+                <div class="bold" style="font-size: 10pt;">DANFE</div>
+                <div style="font-size: 5pt; margin-bottom: 4px;">DOCUMENTO AUXILIAR DA NF-E</div>
+                <div style="border: 1px solid #000; width: 20px; margin: 0 auto; font-size: 11pt; font-weight: bold;">{{operacao}}</div>
+                <div style="font-size: 7pt; margin-top: 2px;">0-ENTRADA<br>1-SAÍDA</div>
+                <div class="bold" style="font-size: 9pt; margin-top: 5px;">N°. {{numero}}<br>SÉRIE {{serie}}</div>
+                <div style="font-size: 7pt;">FOLHA 1/1</div>
+            </td>
+            <td style="width: 40%; text-align: center;">
+                <svg id="barcode"></svg>
+                <div style="border-top: 1px solid #000; margin-top: 4px; padding-top: 2px;">
+                    <span class="label">CHAVE DE ACESSO</span>
+                    <div class="content" style="font-size: 8pt;">{{chave}}</div>
+                </div>
+                <div style="font-size: 5pt; border-top: 1px solid #000; margin-top: 4px; padding-top: 2px;">
+                    CONSULTA DE AUTENTICIDADE NO PORTAL NACIONAL DA NF-E WWW.NFE.FAZENDA.GOV.BR/PORTAL OU NO SITE DA SEFAZ AUTORIZADORA
+                </div>
+            </td>
+        </tr>
+    </table>
 
-    <!-- Destinatário/Remetente -->
+    <table>
+        <tr>
+            <td><span class="label">NATUREZA DA OPERAÇÃO</span><div class="content">{{natureza_operacao}}</div></td>
+            <td><span class="label">PROTOCOLO DE AUTORIZAÇÃO DE USO</span><div class="content">{{protocolo}}</div></td>
+        </tr>
+    </table>
+
+    <table>
+        <tr>
+            <td><span class="label">INSCRIÇÃO ESTADUAL</span><div class="content">{{emitente.ie}}</div></td>
+            <td><span class="label">INSC.ESTADUAL DO SUBST. TRIB.</span><div class="content">{{emitente.ie_st}}</div></td>
+            <td><span class="label">CNPJ</span><div class="content">{{emitente.inscricao_nacional}}</div></td>
+        </tr>
+    </table>
+
     <div class="section-title">DESTINATÁRIO/REMETENTE</div>
-    <div class="border flex">
-        <div class="col" style="flex: 5;"><span class="label">NOME/RAZÃO SOCIAL</span><div class="content">{{destinatario.nome}}</div></div>
-        <div class="col" style="flex: 2;"><span class="label">CNPJ/CPF</span><div class="content">{{destinatario.inscricao_nacional}}</div></div>
-        <div class="col" style="flex: 1;"><span class="label">DATA EMISSÃO</span><div class="content">{{data_emissao}}</div></div>
-    </div>
-    <div class="border flex">
-        <div class="col" style="flex: 4;"><span class="label">ENDEREÇO</span><div class="content">{{destinatario.endereco}}, {{destinatario.numero}} {{#if destinatario.complemento}} - {{destinatario.complemento}}{{/if}}</div></div>
-        <div class="col" style="flex: 2;"><span class="label">BAIRRO/DISTRITO</span><div class="content">{{destinatario.bairro}}</div></div>
-        <div class="col" style="flex: 1;"><span class="label">CEP</span><div class="content">{{destinatario.cep}}</div></div>
-        <div class="col" style="flex: 1;"><span class="label">DATA SAÍDA</span><div class="content">{{data_saida}}</div></div>
-    </div>
-    <div class="border flex">
-        <div class="col" style="flex: 4;"><span class="label">MUNICÍPIO</span><div class="content">{{destinatario.municipio}}</div></div>
-        <div class="col" style="flex: 1;"><span class="label">UF</span><div class="content">{{destinatario.uf}}</div></div>
-        <div class="col" style="flex: 2;"><span class="label">FONE/FAX</span><div class="content">{{destinatario.telefone}}</div></div>
-        <div class="col" style="flex: 2;"><span class="label">INSCRIÇÃO ESTADUAL</span><div class="content">{{destinatario.ie}}</div></div>
-        <div class="col" style="flex: 1;"><span class="label">HORA SAÍDA</span><div class="content">{{hora_saida}}</div></div>
-    </div>
+    <table>
+        <tr>
+            <td style="width: 50%;"><span class="label">NOME/RAZÃO SOCIAL</span><div class="content">{{destinatario.nome}}</div></td>
+            <td style="width: 30%;"><span class="label">CNPJ/CPF</span><div class="content">{{destinatario.inscricao_nacional}}</div></td>
+            <td style="width: 20%;"><span class="label">DATA EMISSÃO</span><div class="content">{{data_emissao}}</div></td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td style="width: 45%;"><span class="label">ENDEREÇO</span><div class="content">{{destinatario.endereco}}, {{destinatario.numero}}</div></td>
+            <td style="width: 25%;"><span class="label">BAIRRO/DISTRITO</span><div class="content">{{destinatario.bairro}}</div></td>
+            <td style="width: 15%;"><span class="label">CEP</span><div class="content">{{destinatario.cep}}</div></td>
+            <td style="width: 15%;"><span class="label">DATA SAÍDA</span><div class="content">{{data_saida}}</div></td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <td style="width: 45%;"><span class="label">MUNICÍPIO</span><div class="content">{{destinatario.municipio}}</div></td>
+            <td style="width: 5%;"><span class="label">UF</span><div class="content">{{destinatario.uf}}</div></td>
+            <td style="width: 15%;"><span class="label">FONE/FAX</span><div class="content">{{destinatario.telefone}}</div></td>
+            <td style="width: 25%;"><span class="label">INSCRIÇÃO ESTADUAL</span><div class="content">{{destinatario.ie}}</div></td>
+            <td style="width: 10%;"><span class="label">HORA SAÍDA</span><div class="content">{{hora_saida}}</div></td>
+        </tr>
+    </table>
 
-    <!-- Cálculo do Imposto -->
     <div class="section-title">CÁLCULO DO IMPOSTO</div>
-    <div class="border flex">
-        <div class="col"><span class="label">BASE DE CÁLC. ICMS</span><div class="content text-right">{{base_calculo_icms}}</div></div>
-        <div class="col"><span class="label">VALOR DO ICMS</span><div class="content text-right">{{imposto_icms}}</div></div>
-        <div class="col"><span class="label">BASE CÁLC. ICMS ST</span><div class="content text-right">{{base_calculo_icms_st}}</div></div>
-        <div class="col"><span class="label">VALOR ICMS ST</span><div class="content text-right">{{imposto_icms_st}}</div></div>
-        <div class="col"><span class="label">VALOR TOTAL PRODUTOS</span><div class="content text-right">{{total_produtos}}</div></div>
-    </div>
-    <div class="border flex">
-        <div class="col"><span class="label">VALOR DO FRETE</span><div class="content text-right">{{total_frete}}</div></div>
-        <div class="col"><span class="label">VALOR DO SEGURO</span><div class="content text-right">{{total_seguro}}</div></div>
-        <div class="col"><span class="label">DESCONTO</span><div class="content text-right">{{total_desconto}}</div></div>
-        <div class="col"><span class="label">OUTRAS DESPESAS</span><div class="content text-right">{{total_despesas}}</div></div>
-        <div class="col"><span class="label">VALOR TOTAL DO IPI</span><div class="content text-right">{{total_ipi}}</div></div>
-        <div class="col"><span class="label">VALOR TOTAL DA NOTA</span><div class="content text-right bold">{{valor_total_nota}}</div></div>
-    </div>
+    <table>
+        <tr>
+            <td><span class="label">BASE DE CÁLC. ICMS</span><div class="content text-right">{{base_calculo_icms}}</div></td>
+            <td><span class="label">VALOR DO ICMS</span><div class="content text-right">{{imposto_icms}}</div></td>
+            <td><span class="label">BASE CÁLC. ICMS ST</span><div class="content text-right">{{base_calculo_icms_st}}</div></td>
+            <td><span class="label">VALOR ICMS ST</span><div class="content text-right">{{imposto_icms_st}}</div></td>
+            <td><span class="label">VALOR TOTAL PRODUTOS</span><div class="content text-right">{{total_produtos}}</div></td>
+        </tr>
+        <tr>
+            <td><span class="label">VALOR DO FRETE</span><div class="content text-right">{{total_frete}}</div></td>
+            <td><span class="label">VALOR DO SEGURO</span><div class="content text-right">{{total_seguro}}</div></td>
+            <td><span class="label">DESCONTO</span><div class="content text-right">{{total_desconto}}</div></td>
+            <td><span class="label">OUTRAS DESPESAS</span><div class="content text-right">{{total_despesas}}</div></td>
+            <td><span class="label">VALOR TOTAL DO IPI</span><div class="content text-right">{{total_ipi}}</div></td>
+            <td><span class="label">VALOR TOTAL DA NOTA</span><div class="content text-right bold">{{valor_total_nota}}</div></td>
+        </tr>
+    </table>
 
-    <!-- Transportador -->
     <div class="section-title">TRANSPORTADOR/VOLUMES TRANSPORTADOS</div>
-    <div class="border flex">
-        <div class="col" style="flex: 4;"><span class="label">RAZÃO SOCIAL</span><div class="content">{{transportador.nome}}</div></div>
-        <div class="col" style="flex: 2;"><span class="label">FRETE POR CONTA</span><div class="content">{{modalidade_frete}} - {{modalidade_frete_texto}}</div></div>
-        <div class="col" style="flex: 1;"><span class="label">CÓD. ANTT</span><div class="content">{{veiculo_antt}}</div></div>
-        <div class="col" style="flex: 1;"><span class="label">PLACA VEÍC.</span><div class="content">{{veiculo_placa}}</div></div>
-        <div class="col" style="flex: 1;"><span class="label">UF</span><div class="content">{{veiculo_placa_uf}}</div></div>
-        <div class="col" style="flex: 2;"><span class="label">CNPJ/CPF</span><div class="content">{{transportador.inscricao_nacional}}</div></div>
-    </div>
-    <div class="border flex">
-        <div class="col" style="flex: 4;"><span class="label">ENDEREÇO</span><div class="content">{{transportador.endereco}}</div></div>
-        <div class="col" style="flex: 3;"><span class="label">MUNICÍPIO</span><div class="content">{{transportador.municipio}}</div></div>
-        <div class="col" style="flex: 1;"><span class="label">UF</span><div class="content">{{transportador.uf}}</div></div>
-        <div class="col" style="flex: 3;"><span class="label">INSCRIÇÃO ESTADUAL</span><div class="content">{{transportador.ie}}</div></div>
-    </div>
-    <div class="border flex">
-        <div class="col"><span class="label">QUANTIDADE</span><div class="content">{{volume_quantidade}}</div></div>
-        <div class="col"><span class="label">ESPÉCIE</span><div class="content">{{volume_especie}}</div></div>
-        <div class="col"><span class="label">MARCA</span><div class="content">{{volume_marca}}</div></div>
-        <div class="col"><span class="label">PESO BRUTO</span><div class="content text-right">{{volume_pesoBruto}}</div></div>
-        <div class="col"><span class="label">PESO LÍQUIDO</span><div class="content text-right">{{volume_pesoLiquido}}</div></div>
-    </div>
+    <table>
+        <tr>
+            <td style="width: 35%;"><span class="label">RAZÃO SOCIAL</span><div class="content">{{transportador.nome}}</div></td>
+            <td style="width: 15%;"><span class="label">FRETE POR CONTA</span><div class="content">{{modalidade_frete}}</div></td>
+            <td style="width: 10%;"><span class="label">CÓD. ANTT</span><div class="content">{{veiculo_antt}}</div></td>
+            <td style="width: 10%;"><span class="label">PLACA VEÍC.</span><div class="content">{{veiculo_placa}}</div></td>
+            <td style="width: 5%;"><span class="label">UF</span><div class="content">{{veiculo_placa_uf}}</div></td>
+            <td style="width: 25%;"><span class="label">CNPJ/CPF</span><div class="content">{{transportador.inscricao_nacional}}</div></td>
+        </tr>
+    </table>
 
-    <!-- Dados dos Itens -->
     <div class="section-title">DADOS DOS PRODUTOS/SERVIÇOS</div>
     <table>
         <thead>
-            <tr>
-                <th width="10%">CÓDIGO</th>
-                <th width="30%">DESCRIÇÃO</th>
-                <th width="8%">NCM</th>
-                <th width="5%">CST</th>
-                <th width="5%">CFOP</th>
-                <th width="4%">UN</th>
-                <th width="10%">QTD</th>
-                <th width="10%">V. UNIT</th>
-                <th width="10%">V. TOTAL</th>
-                <th width="8%">BC ICMS</th>
+            <tr class="bg-gray">
+                <th style="border: 1px solid #000; width: 10%; font-size: 6.5pt;">CÓDIGO</th>
+                <th style="border: 1px solid #000; width: 35%; font-size: 6.5pt;">DESCRIÇÃO</th>
+                <th style="border: 1px solid #000; width: 8%; font-size: 6.5pt;">NCM</th>
+                <th style="border: 1px solid #000; width: 5%; font-size: 6.5pt;">CST</th>
+                <th style="border: 1px solid #000; width: 5%; font-size: 6.5pt;">CFOP</th>
+                <th style="border: 1px solid #000; width: 5%; font-size: 6.5pt;">UN</th>
+                <th style="border: 1px solid #000; width: 8%; font-size: 6.5pt;">QTD</th>
+                <th style="border: 1px solid #000; width: 8%; font-size: 6.5pt;">V. UNIT</th>
+                <th style="border: 1px solid #000; width: 8%; font-size: 6.5pt;">V. TOTAL</th>
+                <th style="border: 1px solid #000; width: 8%; font-size: 6.5pt;">BC ICMS</th>
             </tr>
         </thead>
         <tbody>
@@ -168,25 +175,23 @@
         </tbody>
     </table>
 
-    <!-- Dados Adicionais -->
-<div class="section-title">DADOS ADICIONAIS</div>
-    <div class="border flex" style="min-height: 90px;">
-        <div class="col" style="flex: 7;">
-            <span class="label">INFORMAÇÕES COMPLEMENTARES</span>
-            <div style="font-size: 7pt; line-height: 1.2;">
-                <div>Inf. Contribuinte: {{informacoes_complementares}} {{observacao}}</div>
-  <div style="font-size: 7pt; line-height: 1.2;">
-                Inf. fisco: {{informacoes_fisco}}
-            </div>
+    <div class="section-title">DADOS ADICIONAIS</div>
+    <table style="min-height: 90px;">
+        <tr>
+            <td style="width: 70%;">
+                <span class="label">INFORMAÇÕES COMPLEMENTARES</span>
+                <div style="font-size: 7pt; line-height: 1.2;">
+                    {{informacoes_complementares}} {{observacao}}
+                    <br>Inf. fisco: {{informacoes_fisco}}
+                    <div style="margin-top: 4px;">Valor Aproximado dos Tributos: R$ {{valor_total_tributos}}</div>
+                </div>
+            </td>
+            <td style="width: 30%;">
+                <span class="label">RESERVADO AO FISCO</span>
+            </td>
+        </tr>
+    </table>
 
-                <div style="margin-top: 4px;">Valor Aproximado dos Tributos: R$ {{valor_total_tributos}}</div>
-            </div>
-        </div>
-        <div class="col" style="flex: 3;">
-            <span class="label">RESERVADO AO FISCO</span>
-          
-        </div>
-    </div>    <!-- Script para Geração do Código de Barras -->
     <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
     <script>
         var chaveBruta = "{{chave}}".replace(/[^0-9]/g, '');
@@ -194,8 +199,8 @@
             JsBarcode("#barcode", chaveBruta, {
                 format: "CODE128",
                 displayValue: false,
-                height: 35,
-                width: 1.1,
+                height: 30,
+                width: 1.0,
                 margin: 0,
                 background: "transparent"
             });
