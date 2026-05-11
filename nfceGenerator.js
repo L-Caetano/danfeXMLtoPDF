@@ -1,10 +1,10 @@
-const Danfe = require('./danfe-simplificada/nfce.js');
+const Danfe = require('./nfce/nfce.js');
 const fs = require('fs');
 const html_to_pdf = require('html-pdf-node');
 
 async function createPDF() {
   try {
-    const xmlPath = 'arquivoNfce.xml';
+    const xmlPath = './nfce/arquivoNfce.xml';
     const xmlContent = fs.readFileSync(xmlPath, 'utf8');
 
     if (!xmlContent.includes('<protNFe')) {
@@ -15,7 +15,7 @@ async function createPDF() {
     console.log('Generating HTML from XML...');
     const instance = Danfe.NfcefromXML(xmlContent);
     console.log(JSON.stringify(instance, null, 2));
-    const html = await instance.toHtml('./danfe-nfce.hbs');
+    const html = await instance.toHtml('./nfce/nfce.hbs');
 
     console.log('Converting HTML to PDF...');
 
@@ -30,7 +30,7 @@ async function createPDF() {
 
     const pdfBuffer = await html_to_pdf.generatePdf(file, options);
 
-    fs.writeFileSync('danfe.pdf', pdfBuffer);
+    fs.writeFileSync('nfce.pdf', pdfBuffer);
     console.log('Success! danfe.pdf created.');
 
   } catch (err) {

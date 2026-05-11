@@ -6,7 +6,7 @@
        {{css}}   </style>
 </head>
 <body>
-
+<div class="wrapper">
     <table style="height: 80px;">
         <tr>
             <td style="width: 80%; padding: 0;">
@@ -113,10 +113,15 @@
     <div class="section-title">CÁLCULO DO IMPOSTO</div>
     <table>
         <tr>
-            <td><span class="label">BASE DE CÁLC. ICMS</span><div class="content text-right">{{base_calculo_icms}}</div></td>
+            <td><span class="label">BASE DE CÁLC. DO ICMS</span><div class="content text-right">{{base_calculo_icms}}</div></td>
             <td><span class="label">VALOR DO ICMS</span><div class="content text-right">{{imposto_icms}}</div></td>
             <td><span class="label">BASE CÁLC. ICMS ST</span><div class="content text-right">{{base_calculo_icms_st}}</div></td>
-            <td><span class="label">VALOR ICMS ST</span><div class="content text-right">{{imposto_icms_st}}</div></td>
+            <td><span class="label">VALOR DO ICMS SUBST.</span><div class="content text-right">{{imposto_icms_st}}</div></td>
+
+            <td><span class="label">V. IMP. IMPORTAÇÃO</span><div class="content text-right">{{imposto_icms_st}}</div></td>
+            <td><span class="label">V. ICMS UF REMET.</span><div class="content text-right">{{imposto_icms_st}}</div></td>
+            <td><span class="label">V. FCP UF DEST.</span><div class="content text-right">{{imposto_icms_st}}</div></td>
+            <td><span class="label">VALOR DO PIS</span><div class="content text-right">{{imposto_icms_st}}</div></td>
             <td><span class="label">VALOR TOTAL PRODUTOS</span><div class="content text-right">{{total_produtos}}</div></td>
         </tr>
         <tr>
@@ -125,56 +130,84 @@
             <td><span class="label">DESCONTO</span><div class="content text-right">{{total_desconto}}</div></td>
             <td><span class="label">OUTRAS DESPESAS</span><div class="content text-right">{{total_despesas}}</div></td>
             <td><span class="label">VALOR TOTAL DO IPI</span><div class="content text-right">{{total_ipi}}</div></td>
+            <td><span class="label">V. ICMS UF DEST.</span><div class="content text-right">{{imposto_icms_st}}</div></td>
+            <td><span class="label">V. TOT. TRIB.</span><div class="content text-right">{{imposto_icms_st}}</div></td>
+            <td><span class="label">VALOR DA COFINS</span><div class="content text-right">{{imposto_icms_st}}</div></td>
             <td><span class="label">VALOR TOTAL DA NOTA</span><div class="content text-right bold">{{valor_total_nota}}</div></td>
         </tr>
     </table>
 
     <div class="section-title">TRANSPORTADOR/VOLUMES TRANSPORTADOS</div>
-    <table>
-        <tr>
-            <td style="width: 35%;"><span class="label">RAZÃO SOCIAL</span><div class="content">{{transportador.nome}}</div></td>
-            <td style="width: 15%;"><span class="label">FRETE POR CONTA</span><div class="content">{{modalidade_frete}}</div></td>
-            <td style="width: 10%;"><span class="label">CÓD. ANTT</span><div class="content">{{veiculo_antt}}</div></td>
-            <td style="width: 10%;"><span class="label">PLACA VEÍC.</span><div class="content">{{veiculo_placa}}</div></td>
-            <td style="width: 5%;"><span class="label">UF</span><div class="content">{{veiculo_placa_uf}}</div></td>
-            <td style="width: 25%;"><span class="label">CNPJ/CPF</span><div class="content">{{transportador.inscricao_nacional}}</div></td>
+<table>
+    <tr>
+        <td style="width: 30%;"><span class="label">NOME / RAZÃO SOCIAL</span><div class="content">{{transportador.nome}}</div></td>
+        <td style="width: 15%;"><span class="label">FRETE POR CONTA</span><div class="content">{{modalidade_frete}}</div></td>
+        <td style="width: 10%;"><span class="label">CÓDIGO ANTT</span><div class="content">{{veiculo_antt}}</div></td>
+        <td style="width: 15%;"><span class="label">PLACA DO VEÍCULO</span><div class="content">{{veiculo_placa}}</div></td>
+        <td style="width: 5%;"><span class="label">UF</span><div class="content">{{veiculo_placa_uf}}</div></td>
+        <td style="width: 25%;"><span class="label">CNPJ / CPF</span><div class="content">{{transportador.inscricao_nacional}}</div></td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <td style="width: 45%;"><span class="label">ENDEREÇO</span><div class="content">{{transportador.endereco}}</div></td>
+        <td style="width: 25%;"><span class="label">MUNICÍPIO</span><div class="content">{{transportador.municipio}}</div></td>
+        <td style="width: 5%;"><span class="label">UF</span><div class="content">{{transportador.uf}}</div></td>
+        <td style="width: 25%;"><span class="label">INSCRIÇÃO ESTADUAL</span><div class="content">{{transportador.ie}}</div></td>
+    </tr>
+</table>
+<table>
+    <tr>
+        <td style="width: 10%;"><span class="label">QUANTIDADE</span><div class="content">{{volume_quantidade}}</div></td>
+        <td style="width: 16%;"><span class="label">ESPÉCIE</span><div class="content">{{volume_especie}}</div></td>
+        <td style="width: 17%;"><span class="label">MARCA</span><div class="content">{{volume_marca}}</div></td>
+        <td style="width: 17%;"><span class="label">NUMERAÇÃO</span><div class="content">{{volume_numeracao}}</div></td>
+        <td style="width: 20%;"><span class="label">PESO BRUTO</span><div class="content text-right">{{volume_pesoBruto}}</div></td>
+        <td style="width: 20%;"><span class="label">PESO LÍQUIDO</span><div class="content text-right">{{volume_pesoLiquido}}</div></td>
+    </tr>
+</table>    <div class="section-title">DADOS DOS PRODUTOS/SERVIÇOS</div>
+   <div class="section-title">DADOS DOS PRODUTOS / SERVIÇOS</div>
+<table>
+    <thead>
+        <tr class="bg-gray">
+            <th style="width: 7%; font-size: 5.5pt;">CÓDIGO PRODUTO</th>
+            <th style="width: 22%; font-size: 5.5pt;">DESCRIÇÃO DO PRODUTO / SERVIÇO</th>
+            <th style="width: 8%; font-size: 5.5pt;">NCM/SH</th>
+            <th style="width: 5%; font-size: 5.5pt;">O/CST</th>
+            <th style="width: 5%; font-size: 5.5pt;">CFOP</th>
+            <th style="width: 3%; font-size: 5.5pt;">UN</th>
+            <th style="width: 7%; font-size: 5.5pt;">QUANT</th>
+            <th style="width: 7%; font-size: 5.5pt;">VALOR UNIT</th>
+            <th style="width: 7%; font-size: 5.5pt;">VALOR TOTAL</th>
+            <th style="width: 7%; font-size: 5.5pt;">B.CÁLC ICMS</th>
+            <th style="width: 6%; font-size: 5.5pt;">VALOR ICMS</th>
+            <th style="width: 5%; font-size: 5.5pt;">VALOR IPI</th>
+            <th style="width: 5%; font-size: 5.5pt;">ALÍQ. ICMS</th>
+            <th style="width: 6%; font-size: 5.5pt;">ALÍQ. IPI</th>
         </tr>
-    </table>
-
-    <div class="section-title">DADOS DOS PRODUTOS/SERVIÇOS</div>
-    <table>
-        <thead>
-            <tr class="bg-gray">
-                <th style="border: 1px solid #000; width: 10%; font-size: 6.5pt;">CÓDIGO</th>
-                <th style="border: 1px solid #000; width: 35%; font-size: 6.5pt;">DESCRIÇÃO</th>
-                <th style="border: 1px solid #000; width: 8%; font-size: 6.5pt;">NCM</th>
-                <th style="border: 1px solid #000; width: 5%; font-size: 6.5pt;">CST</th>
-                <th style="border: 1px solid #000; width: 5%; font-size: 6.5pt;">CFOP</th>
-                <th style="border: 1px solid #000; width: 5%; font-size: 6.5pt;">UN</th>
-                <th style="border: 1px solid #000; width: 8%; font-size: 6.5pt;">QTD</th>
-                <th style="border: 1px solid #000; width: 8%; font-size: 6.5pt;">V. UNIT</th>
-                <th style="border: 1px solid #000; width: 8%; font-size: 6.5pt;">V. TOTAL</th>
-                <th style="border: 1px solid #000; width: 8%; font-size: 6.5pt;">BC ICMS</th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#each itens}}
-            <tr>
-                <td class="center">{{codigo}}</td>
-                <td>{{descricao}}</td>
-                <td class="center">{{ncm}}</td>
-                <td class="center">{{cst}}</td>
-                <td class="center">{{cfop}}</td>
-                <td class="center">{{unidade}}</td>
-                <td class="text-right">{{quantidade}}</td>
-                <td class="text-right">{{valor}}</td>
-                <td class="text-right">{{total}}</td>
-                <td class="text-right">{{base_calculo}}</td>
-            </tr>
-            {{/each}}
-        </tbody>
-    </table>
-
+    </thead>
+    <tbody>
+        {{#each itens}}
+        <tr>
+            <td class="center">{{codigo}}</td>
+            <td>{{descricao}}</td>
+            <td class="center">{{ncm}}</td>
+            <td class="center">{{cst}}</td>
+            <td class="center">{{cfop}}</td>
+            <td class="center">{{unidade}}</td>
+            <td class="text-right">{{quantidade}}</td>
+            <td class="text-right">{{valor}}</td>
+            <td class="text-right">{{total}}</td>
+            <td class="text-right">{{base_calculo}}</td>
+            <td class="text-right">{{valor_icms}}</td>
+            <td class="text-right">{{valor_ipi}}</td>
+            <td class="center">{{aliquota_icms}}</td>
+            <td class="center">{{aliquota_ipi}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+  <div class="footer-container">
     <div class="section-title">DADOS ADICIONAIS</div>
     <table style="min-height: 90px;">
         <tr>
@@ -191,8 +224,7 @@
             </td>
         </tr>
     </table>
-
-    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+</div>    <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
     <script>
         var chaveBruta = "{{chave}}".replace(/[^0-9]/g, '');
         if(chaveBruta) {
@@ -206,5 +238,6 @@
             });
         }
     </script>
+    </div>
 </body>
 </html>

@@ -5,7 +5,7 @@ const html_to_pdf = require('html-pdf-node');
 
 async function createPDF() {
   try {
-    const xmlPath = 'danfe/arquivo3.xml';
+    const xmlPath = 'danfe/xmlbizurado.xml';
     const xmlContent = fs.readFileSync(xmlPath, 'utf8');
 
     if (!xmlContent.includes('<protNFe')) {
