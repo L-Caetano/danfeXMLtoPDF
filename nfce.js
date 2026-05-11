@@ -15,7 +15,7 @@ async function createPDF() {
     console.log('Generating HTML from XML...');
     const instance = Danfe.NfcefromXML(xmlContent);
     console.log(JSON.stringify(instance, null, 2));
-    const html = instance.toHtml('./danfe-nfce.hbs');
+    const html = await instance.toHtml('./danfe-nfce.hbs');
 
     console.log('Converting HTML to PDF...');
 
