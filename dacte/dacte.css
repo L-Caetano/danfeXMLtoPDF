@@ -31,7 +31,7 @@
 
   .label {
     display: block;
-    font-size: 4pt;
+    font-size: 6pt;
     font-weight: bold;
     text-transform: uppercase;
     margin-bottom: 1px;
@@ -81,6 +81,14 @@
     font-family: monospace;
   }
 
+.dashed-line-horizontal {
+  width: 100%;
+  border-top: 2px dashed #000;
+}
+  
+
+  .h10 { height: 10px; }
+  .h20 { height: 20px; }
   .h30 { height: 30px; }
   .h40 { height: 40px; }
   .h55 { height: 55px; }
@@ -88,5 +96,7 @@
   .h50 { height: 50px; }
   .h60 { height: 60px; }
   .h70 { height: 70px; }
-  .h90 { height: 90px; }
+
+  .h80 { height: 80px; }
+  .h97 { height: 97px; }
 

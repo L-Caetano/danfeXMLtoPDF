@@ -10,24 +10,19 @@
 <div class="container">
 
   <!-- CABEÇALHO -->
- <table>
+<table style="width:100%; border-collapse:collapse;">
 
   <tr>
 
     <!-- COLUNA ESQUERDA -->
     <td style="width:38%; padding:0; vertical-align:top;">
 
-      <table style="width:100%; border-collapse:collapse;">
+      <table style="width:100%; border-collapse:collapse; ">
 
         <!-- EMITENTE -->
-        <tr>
+        <tr class="h97" >
 
-          <td>
 
-            <table style="width:100%; border-collapse:collapse;">
-
-              <tr>
-                <td class="center">
 
                   {{#if logo}}
                     <img
@@ -36,36 +31,16 @@
                     />
                   {{/if}}
 
-                </td>
-              </tr>
-
-              <tr>
-                <td class="center bold">
+<span class="value center bold">
                   {{emitente.nome}}
-                </td>
-              </tr>
-
-              <tr>
-                <td class="center tiny">
+</span>
                   {{emitente.endereco}}
-                </td>
-              </tr>
 
-              <tr>
-                <td class="center tiny">
                   {{emitente.municipio}} - {{emitente.uf}}
-                </td>
-              </tr>
 
-              <tr>
-                <td class="center tiny">
                   {{emitente.telefone}}
-                </td>
-              </tr>
 
-            </table>
 
-          </td>
 
         </tr>
 
@@ -141,7 +116,7 @@
 
       <!-- DACTE -->
       <td
-        style="width:40%;"
+        style="width:60%;"
         class="center h40"
       >
 
@@ -178,7 +153,7 @@
     <tr>
 
       <!-- MODELO -->
-      <td class="h30">
+      <td class="h30" colspan="2">
 
         <span class="label">
           MODELO
@@ -191,7 +166,7 @@
       </td>
 
       <!-- SÉRIE -->
-      <td class="h30">
+      <td class="h30" colspan="2">
 
         <span class="label">
           SÉRIE
@@ -204,7 +179,7 @@
       </td>
 
       <!-- NÚMERO -->
-      <td class="h30">
+      <td class="h30" colspan="3">
 
         <span class="label">
           NÚMERO
@@ -230,7 +205,7 @@
       </td>
 
       <!-- DATA -->
-      <td class="h30">
+      <td class="h30" colspan="4">
 
         <span class="label">
           DATA E HORA DE EMISSÃO
@@ -241,7 +216,7 @@
         </span>
 
       </td>
- <td colspan="5" class="h30">
+ <td colspan="4" class="h30">
 
         <span class="label">
           INSC. SUFRAMA DO DESTINATÁRIO
@@ -310,12 +285,24 @@ ou em http://www.cte.fazenda.gov.br
 
 </td>  </tr>
 
-</table><table>
+</table>
+
+<table>
 
   <!-- PRIMEIRA ROW -->
   <tr>
 
-    <td style="width:55%;">
+    <td style="width:38%;" class="h30">
+      <span class="label">CFOP - NATUREZA DA PRESTAÇÃO</span>
+      <span class="value">
+        {{#if naturezaPrestacao}}
+          {{cfop}} - {{naturezaPrestacao}}
+        {{else}}
+          &nbsp;
+        {{/if}}
+      </span>
+    </td>
+    <td style="width:62%;"  class="h30">
       <span class="label">PROTOCOLO DE AUTORIZAÇÃO DE USO</span>
       <span class="value">
         {{#if protocolo}}
@@ -326,23 +313,15 @@ ou em http://www.cte.fazenda.gov.br
       </span>
     </td>
 
-    <td style="width:45%;">
-      <span class="label">CFOP - NATUREZA DA PRESTAÇÃO</span>
-      <span class="value">
-        {{#if naturezaPrestacao}}
-          {{cfop}} - {{naturezaPrestacao}}
-        {{else}}
-          &nbsp;
-        {{/if}}
-      </span>
-    </td>
 
   </tr>
-
+</table>
   <!-- SEGUNDA ROW -->
+
+<table>
   <tr>
 
-    <td style="width:50%;">
+    <td style="width:50%;" class="h30">
       <span class="label">INÍCIO DA PRESTAÇÃO</span>
 
       <span class="value">
@@ -354,7 +333,7 @@ ou em http://www.cte.fazenda.gov.br
       </span>
     </td>
 
-    <td style="width:50%;">
+    <td style="width:50%;" class="h30">
       <span class="label">TÉRMINO DA PRESTAÇÃO</span>
 
       <span class="value">
@@ -368,11 +347,11 @@ ou em http://www.cte.fazenda.gov.br
 
   </tr>
 
-</table><div class="section">REMETENTE / DESTINATÁRIO / EXPEDIDOR / RECEBEDOR</div>
+</table>
 
   <table>
     <tr>
-      <td style="width:50%;">
+      <td style="width:50%;" class="h55">
         <span class="label">REMETENTE</span>
         <span class="value bold">{{remetente.nome}}</span>
         <span class="value">{{remetente.endereco}}</span>
@@ -381,7 +360,7 @@ ou em http://www.cte.fazenda.gov.br
         <span class="value">CNPJ/CPF {{remetente.documento}} - IE {{remetente.ie}}</span>
       </td>
 
-      <td style="width:50%;">
+      <td style="width:50%;" class="h55">
         <span class="label">DESTINATÁRIO</span>
         <span class="value bold">{{destinatario.nome}}</span>
         <span class="value">{{destinatario.endereco}}</span>
@@ -392,7 +371,7 @@ ou em http://www.cte.fazenda.gov.br
     </tr>
 
     <tr>
-      <td style="width:50%;">
+      <td style="width:50%;" class="h55">
         <span class="label">EXPEDIDOR</span>
         <span class="value bold">{{expedidor.nome}}</span>
         <span class="value">{{expedidor.endereco}}</span>
@@ -401,7 +380,7 @@ ou em http://www.cte.fazenda.gov.br
         <span class="value">CNPJ/CPF {{expedidor.documento}} - IE {{expedidor.ie}}</span>
       </td>
 
-      <td style="width:50%;">
+      <td style="width:50%;" class="h55">
         <span class="label">RECEBEDOR</span>
         <span class="value bold">{{recebedor.nome}}</span>
         <span class="value">{{recebedor.endereco}}</span>
@@ -425,66 +404,117 @@ ou em http://www.cte.fazenda.gov.br
     </tr>
   </table>
 
-  <div class="section">DADOS DA CARGA</div>
 
   <table>
-    <tr>
-      <td colspan="2">
+    <tr class="h30">
+      <td colspan="4"  >
         <span class="label">PRODUTO PREDOMINANTE</span>
         <span class="value">{{carga.proPred}}</span>
       </td>
-
-      <td>
+    <td colspan="2">
+        <span class="label">OUTRAS CARACTERÍSTICAS DA CARGA</span>
+        <span class="value">{{carga.proPred}}</span>
+ 
+    </td>
+      <td colspan="2">
         <span class="label">VALOR TOTAL MERCADORIA</span>
         <span class="value center bold">{{carga.vCarga}}</span>
       </td>
     </tr>
-
-    <tr>
-      <td>
-        <span class="label">PESO DECLARADO</span>
+    </table>
+<table>
+    <tr class="h40">
+      <td colspan="4">
+        <span class="label">TP MED /UN. MED</span>
         <span class="value center">{{carga.pesoBruto}}</span>
       </td>
 
-      <td>
-        <span class="label">PESO BASE CÁLCULO</span>
+      <td  colspan="4">
+        <span class="label">TP MED /UN. MED</span>
         <span class="value center">{{carga.pesoBase}}</span>
       </td>
 
-      <td>
-        <span class="label">PESO CUBADO</span>
+      <td colspan="4">
+        <span class="label">TP MED /UN. MED</span>
         <span class="value center">{{carga.pesoCubado}}</span>
       </td>
+<td colspan="3">
+        <span class="label">CUBAGEM(M3)</span>
+        <span class="value center">{{carga.pesoCubado}}</span>
+      </td>
+<td colspan="3">
+        <span class="label">QTDE(VOL)</span>
+        <span class="value center">{{carga.pesoCubado}}</span>
+      </td>
+    <td colspan="16">
+<table>
+ <tr class="h10" >  
+        <td><span class="label">NOME DA SEGURADORA</span></td>
+ </tr>
+</table>
+<table>
+    <tr class="h30">
+ <td>
+
+        <span class="label">RESPONSÁVEL</span>
+ </td>
+ <td>
+
+        <span class="label">NÚMERO DA APOLICE</span>
+ </td>
+ <td>
+        <span class="label">NÚMERO DA AVERBAÇÃO</span>
+ </td></tr>
+  </table>
+    </td>
     </tr>
   </table>
 
+
+
   <div class="section">COMPONENTES DO VALOR DA PRESTAÇÃO DO SERVIÇO</div>
 
-  <table>
-    <tr>
-      {{#each prestacao.comp}}
+  <table >
+    <tr class="h80">
       <td>
-        <span class="label">{{this.xNome}}</span>
-        <span class="value center">{{this.vComp}}</span>
+        <span class="label">NOME</span>
+        <span class="value center">VALOR</span>
       </td>
-      {{/each}}
+ <td>
+        <span class="label">NOME</span>
+        <span class="value center">VALOR</span>
+      </td>
+ <td>
+        <span class="label">NOME</span>
+        <span class="value center">VALOR</span>
+      </td>
 
-      <td>
+
+ <td>
+
+  <table>
+      <tr class="h40">
+<td>
         <span class="label">VALOR TOTAL SERVIÇO</span>
         <span class="value center bold">{{valores.totalServico}}</span>
-      </td>
+        </td>
+      </tr>
 
+      <tr class="h40">
       <td>
         <span class="label">VALOR A RECEBER</span>
         <span class="value center bold">{{valores.valorReceber}}</span>
-      </td>
+        </td>
+      </tr>
+</table>
+</td>
     </tr>
   </table>
 
   <div class="section">INFORMAÇÕES RELATIVAS AO IMPOSTO</div>
 
   <table>
-    <tr>
+    <tr class="h40">
       <td>
         <span class="label">SITUAÇÃO TRIBUTÁRIA</span>
         <span class="value">{{imposto.cst}}</span>
@@ -504,21 +534,30 @@ ou em http://www.cte.fazenda.gov.br
         <span class="label">VALOR ICMS</span>
         <span class="value center bold">{{imposto.valor}}</span>
       </td>
+  <td>
+        <span class="label">% RED. BC ICMS</span>
+        <span class="value center bold">{{imposto.valor}}</span>
+      </td>
     </tr>
   </table>
 
   <div class="section">DOCUMENTOS ORIGINÁRIOS</div>
 
   <table>
-    <tr>
-      <td class="h70">
-        {{#each docs}}
+    <tr class="h97">
+      <td >
           <div style="margin-bottom:4px;">
             <span class="bold">{{this.tipo}}</span>
             <span class="mono">{{this.chave}}</span>
             {{this.serie}}/{{this.nro}}
           </div>
-        {{/each}}
+      </td>
+ <td >
+          <div style="margin-bottom:4px;">
+            <span class="bold">{{this.tipo}}</span>
+            <span class="mono">{{this.chave}}</span>
+            {{this.serie}}/{{this.nro}}
+          </div>
       </td>
     </tr>
   </table>
@@ -527,7 +566,7 @@ ou em http://www.cte.fazenda.gov.br
 
   <table>
     <tr>
-      <td class="h55">
+      <td class="h40">
         <span class="value">{{obs}}</span>
       </td>
     </tr>
@@ -536,71 +575,92 @@ ou em http://www.cte.fazenda.gov.br
   <div class="section">DADOS ESPECÍFICOS DO MODAL RODOVIÁRIO</div>
 
   <table>
-    <tr>
-      <td>
+    <tr class="h40">
+      <td colspan="4">
         <span class="label">RNTRC DA EMPRESA</span>
         <span class="value">{{rntrc}}</span>
       </td>
 
-      <td>
+      <td  colspan="4">
         <span class="label">CIOT</span>
         <span class="value">{{ciot}}</span>
       </td>
 
-      <td>
+      <td colspan="2">
         <span class="label">LOTAÇÃO</span>
         <span class="value">{{lotacao}}</span>
       </td>
+      <td colspan="4">
+        <span class="label">DATA PREVISTA DE ENTREGA</span>
+      </td>
+ <td colspan="10">
+        <span class="label">ESTE CONHECIMENTO DE TRANSPORTE ATENDE
+À LEGISLAÇÃO DE TRANSPORTE RODOVIÁRIO EM VIGOR</span>
+      </td>
+
     </tr>
   </table>
 
-  <div class="section">USO EXCLUSIVO DO EMISSOR DO CT-E</div>
-
   <table>
-    <tr>
-      <td class="h40">
+  <tr class="h40">
+
+      <td colspan="7">
+
+  <div class="section">USO EXCLUSIVO DO EMISSOR DO CT-E</div>
         <span class="value tiny">
           Este documento foi emitido conforme legislação vigente.
         </span>
       </td>
-    </tr>
-  </table>
+
+      <td colspan="3">
 
   <div class="section">RESERVADO AO FISCO</div>
-
-  <table>
-    <tr>
-      <td class="h40"></td>
-    </tr>
+      </td>
+</tr>
   </table>
-
-  <table>
-    <tr>
-      <td class="center h55">
-        <div class="bold tiny">
+  <br>
+<div class="dashed-line-horizontal"></div>
+<br>
+<div class="section">
           DECLARO QUE RECEBI OS VOLUMES DESTE CONHECIMENTO
           EM PERFEITO ESTADO PELO QUE DOU POR CUMPRIDO
           O PRESENTE CONTRATO DE TRANSPORTE
         </div>
-      </td>
-    </tr>
-  </table>
-
   <table>
-    <tr>
-      <td style="width:50%;" class="h40">
+    <tr class="h80">
+   <td colspan="4">
+   <table>
+    <tr class="h40">
+      <td >
         <span class="label">NOME</span>
       </td>
+</tr>
 
-      <td style="width:25%;" class="h40">
+    <tr class="h40">
+      <td >
         <span class="label">RG</span>
       </td>
 
-      <td style="width:25%;" class="h40">
+</tr>
+  </table>
+    </td>
+ <td colspan="4">
         <span class="label">ASSINATURA / CARIMBO</span>
       </td>
+<td colspan="5">
+        <span class="label">TÉRMINO DA PRESTAÇÃO - DATA/HORA</span>
+
+        <span class="label">INÍCIO DA PRESTAÇÃO - DATA/HORA</span>
+      </td>
+ <td colspan="2">
+        <span class="label">CT-E</span>
+
+      </td>
+  
     </tr>
   </table>
+
+  
 <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
 
   <script>
