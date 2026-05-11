@@ -4,6 +4,7 @@ const fs = require('fs')
 const path = require('path')
 const QRCode = require('qrcode')
 
+const cssPath = path.join(__dirname, './nfce.css');
 const TEMPLATE_DANFE = path.join(__dirname, 'template-danfe.hbs')
 
 function mascaraCPF(valor) {
@@ -153,7 +154,8 @@ async function renderHtml(data, logo = "", customTemplate) {
     : TEMPLATE_DANFE
 
   const template = fs.readFileSync(pathToTemplate, 'utf8')
-  return handlebars.compile(template)({ ...data, emitente: { ...data.emitente, logo } })
+  const css = fs.readFileSync(cssPath, 'utf8');
+  return handlebars.compile(template)({ ...data, css, emitente: { ...data.emitente, logo } })
 }
 
 module.exports.NfcefromXML = function (xml, logo = "") {
