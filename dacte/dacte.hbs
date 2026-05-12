@@ -2,95 +2,113 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-    <style>
+  <style>
     {{{css}}}
-  </style>   
-  </head>
+  </style>
+</head>
+
 <body>
 <div class="container">
 
-  <!-- CABEÇALHO -->
 <table style="width:100%; border-collapse:collapse;">
 
   <tr>
 
-    <!-- COLUNA ESQUERDA -->
     <td style="width:38%; padding:0; vertical-align:top;">
 
-      <table style="width:100%; border-collapse:collapse; ">
+    <table style="width:100%; border-collapse:collapse;">
+  <tr class="h97">
+    <td style="vertical-align: middle; text-align: center;">
 
-        <!-- EMITENTE -->
-        <tr class="h97" >
+      {{#if logo}}
+        <div style="margin-bottom: 5px;">
+          <img
+            src="{{logo}}"
+            style="max-height:55px; max-width:120px;"
+          />
+        </div>
+      {{/if}}
 
+      <div class="value center bold" style="font-size: 12pt; margin-bottom: 4px; line-height: 1.2;">
+        {{emitente.nome}}
+      </div>
 
+      <div style="font-size: 7pt; line-height: 1.1;">
+        <div class="value center">
+          {{emitente.endereco.linha1}}
+        </div>
 
-                  {{#if logo}}
-                    <img
-                      src="{{logo}}"
-                      style="max-height:55px; max-width:120px;"
-                    />
-                  {{/if}}
+        <div class="value center">
+          {{emitente.endereco.linha2}}
+        </div>
 
-<span class="value center bold">
-                  {{emitente.nome}}
-</span>
-                  {{emitente.endereco}}
+        <div class="value center">
+          CEP {{emitente.endereco.cep}}
+        </div>
 
-                  {{emitente.municipio}} - {{emitente.uf}}
+        <div class="value center">
+          {{emitente.fone}}
+        </div>
 
-                  {{emitente.telefone}}
+        <div class="value center">
+          CNPJ: {{emitente.documento}}
+        </div>
 
+        <div class="value center">
+          IE: {{emitente.ie}}
+        </div>
+      </div>
 
+    </td>
+  </tr>
+</table>
 
-        </tr>
-
-        <!-- TIPO CT-E / SERVIÇO -->
+<table style="width:100%; border-collapse:collapse;">
         <tr>
 
           <td style="width:50%;" class="h30">
 
-            <span class="label">
+            <span class="label center">
               TIPO DO CT-E
             </span>
 
-            <span class="value bold center">
-              {{tipoCte}}
+            <span class="value  center">
+              {{tipo_cte}}
             </span>
 
           </td>
 
           <td style="width:50%;" class="h30">
 
-            <span class="label">
+            <span class="label center">
               TIPO DO SERVIÇO
             </span>
 
-            <span class="value bold center">
-              {{tipoServico}}
+            <span class="value  center">
+              {{servico}}
             </span>
 
           </td>
 
         </tr>
 
-        <!-- TOMADOR / PAGAMENTO -->
         <tr>
 
           <td class="h30">
 
-            <span class="label">
+            <span class="label center">
               TOMADOR DO SERVIÇO
             </span>
 
-            <span class="value bold center">
-              {{tomador.tipo}}
+            <span class="value  center">
+              {{tomador.nome}}
             </span>
 
           </td>
 
           <td class="h30">
 
-            <span class="label">
+            <span class="label center">
               FORMA DE PAGAMENTO
             </span>
 
@@ -106,577 +124,1233 @@
 
     </td>
 
-    <!-- COLUNA DIREITA -->
-<td style="width:62%; padding:0; vertical-align:top;">
+    <td style="width:62%; padding:0; vertical-align:top;">
 
-  <table style="width:100%; border-collapse:collapse;">
+      <table style="width:100%; border-collapse:collapse;">
 
-    <!-- LINHA DACTE -->
-    <tr >
+        <tr>
 
-      <!-- DACTE -->
-      <td
-        style="width:60%;"
-        class="center h40"
-      >
+          <td
+            style="width:60%;"
+            class="center h40"
+          >
 
-        <div class="bold" style="font-size: large">
-          DACTE
-        </div>
+            <div class="bold" style="font-size: large">
+              DACTE
+            </div>
 
-        <div class="tiny">
-          DOCUMENTO AUXILIAR DO
-          CONHECIMENTO DE TRANSPORTE
-          ELETRÔNICO
-        </div>
+            <div class="tiny">
+              DOCUMENTO AUXILIAR DO
+              CONHECIMENTO DE TRANSPORTE
+              ELETRÔNICO
+            </div>
 
-      </td>
+          </td>
 
-      <!-- MODAL -->
-      <td class="h40" >
+          <td class="h40">
 
-        <span class="label">
-          MODAL
-        </span>
+            <span class="label center">
+              MODAL
+            </span>
 
-        <span class="value center bold">
-          {{modal}}
-        </span>
+            <span class="value center bold">
+              {{modal}}
+            </span>
 
-      </td>
+          </td>
 
-    </tr>
-</table>
+        </tr>
 
-  <table style="width:100%; border-collapse:collapse;">
-    <!-- MODELO / SERIE / NUMERO / FL / DATA -->
-    <tr>
+      </table>
 
-      <!-- MODELO -->
-      <td class="h30" colspan="2">
+      <table style="width:100%; border-collapse:collapse;">
 
-        <span class="label">
-          MODELO
-        </span>
+        <tr>
 
-        <span class="value center bold">
-          {{modelo}}
-        </span>
+          <td class="h30" colspan="2">
 
-      </td>
+            <span class="label center">
+              MODELO
+            </span>
 
-      <!-- SÉRIE -->
-      <td class="h30" colspan="2">
+            <span class="value center bold">
+              57
+            </span>
 
-        <span class="label">
-          SÉRIE
-        </span>
+          </td>
 
-        <span class="value center bold">
-          {{serie}}
-        </span>
+          <td class="h30" colspan="2">
 
-      </td>
+            <span class="label center">
+              SÉRIE
+            </span>
 
-      <!-- NÚMERO -->
-      <td class="h30" colspan="3">
+            <span class="value center bold">
+              {{serie}}
+            </span>
 
-        <span class="label">
-          NÚMERO
-        </span>
+          </td>
 
-        <span class="value center bold">
-          {{numero}}
-        </span>
+          <td class="h30" colspan="3">
 
-      </td>
+            <span class="label center">
+              NÚMERO
+            </span>
 
-      <!-- FL -->
-      <td class="h30">
+            <span class="value center bold">
+              {{numero}}
+            </span>
 
-        <span class="label">
-          FL
-        </span>
+          </td>
 
-        <span class="value center bold">
-          1/1
-        </span>
+          <td class="h30">
 
-      </td>
+            <span class="label center">
+              FL
+            </span>
 
-      <!-- DATA -->
-      <td class="h30" colspan="4">
+            <span class="value center bold">
+              1/1
+            </span>
 
-        <span class="label">
-          DATA E HORA DE EMISSÃO
-        </span>
+          </td>
 
-        <span class="value center bold">
-          {{dataHoraEmissao}}
-        </span>
+          <td class="h30" colspan="4">
 
-      </td>
- <td colspan="4" class="h30">
+            <span class="label center">
+              DATA E HORA DE EMISSÃO
+            </span>
 
-        <span class="label">
-          INSC. SUFRAMA DO DESTINATÁRIO
-        </span>
+            <span class="value center bold">
+              {{data_emissao}}
+            </span>
 
-        <span class="value center bold">
-          {{inscricaoSuframa}}
-        </span>
+          </td>
 
-      </td>
-     
+          <td colspan="4" class="h30">
 
-    </tr>
-</table>
+            <span class="label center" >
+              INSC. SUFRAMA DO DESTINATÁRIO
+            </span>
 
-  <table style="width:100%; border-collapse:collapse;">
-    <!-- BARCODE -->
-    <tr>
+            <span class="value center bold">
+              {{destinatario.suframa}}
+            </span>
 
-      <td colspan="5" class="center h40">
+          </td>
 
-        <svg id="barcode"></svg>
+        </tr>
 
-      </td>
+      </table>
 
-    </tr>
+      <table style="width:100%; border-collapse:collapse;">
 
-    <!-- CHAVE -->
-    <tr>
+        <tr>
 
-      <td colspan="5" class="center h30">
+          <td colspan="5" class="center h40">
+            <svg id="barcode"></svg>
+          </td>
 
-        <span class="label">
-          CHAVE DE ACESSO
-        </span>
+        </tr>
 
-        <span
-          class="value mono bold center"
-          style="font-size:7pt;"
-        >
+        <tr>
 
-          {{chave}}
+          <td colspan="5" class="center h30">
 
-        </span>
+            <span class="label">
+              CHAVE DE ACESSO
+            </span>
 
-      </td>
+            <span
+              class="value mono bold center"
+              style="font-size:7pt;"
+            >
 
-    </tr>
+              {{chave_formatada}}
 
-    <!-- CONSULTA -->
-    <tr>
+            </span>
 
-      <td colspan="5" class="center h30">
+          </td>
 
-        <span style="font-size:7pt;"
->
-        Consulta de autenticidade no portal nacional do CT-e, no site da Sefaz Autorizadora,
-ou em http://www.cte.fazenda.gov.br       
-</span>
+        </tr>
 
-      </td>
+        <tr>
 
-    </tr>
+          <td colspan="5" class="center h30">
 
-  </table>
+            <span style="font-size:7pt;">
+              Consulta de autenticidade no portal nacional do CT-e,
+              no site da Sefaz Autorizadora,
+              ou em http://www.cte.fazenda.gov.br
+            </span>
 
-</td>  </tr>
+          </td>
+
+        </tr>
+
+      </table>
+
+    </td>
+
+  </tr>
 
 </table>
 
 <table>
 
-  <!-- PRIMEIRA ROW -->
   <tr>
 
     <td style="width:38%;" class="h30">
-      <span class="label">CFOP - NATUREZA DA PRESTAÇÃO</span>
-      <span class="value">
-        {{#if naturezaPrestacao}}
-          {{cfop}} - {{naturezaPrestacao}}
-        {{else}}
-          &nbsp;
-        {{/if}}
+
+      <span class="label">
+        CFOP - NATUREZA DA PRESTAÇÃO
       </span>
-    </td>
-    <td style="width:62%;"  class="h30">
-      <span class="label">PROTOCOLO DE AUTORIZAÇÃO DE USO</span>
+
       <span class="value">
-        {{#if protocolo}}
-          {{protocolo}}
-        {{else}}
-          &nbsp;
-        {{/if}}
+        {{cfop}} - {{natureza_operacao}}
       </span>
+
     </td>
 
+    <td style="width:62%;" class="h30">
+
+      <span class="label">
+        PROTOCOLO DE AUTORIZAÇÃO DE USO
+      </span>
+
+      <span class="value">
+        {{protocolo_formatado}}
+      </span>
+
+    </td>
 
   </tr>
+
 </table>
-  <!-- SEGUNDA ROW -->
 
 <table>
+
   <tr>
 
     <td style="width:50%;" class="h30">
-      <span class="label">INÍCIO DA PRESTAÇÃO</span>
+
+      <span class="label">
+        INÍCIO DA PRESTAÇÃO
+      </span>
 
       <span class="value">
-        {{#if inicioPrestacao}}
-          {{inicioPrestacao}}
-        {{else}}
-          &nbsp;
-        {{/if}}
+        {{municipio_inicio}} - {{uf_inicio}}
       </span>
+
     </td>
 
     <td style="width:50%;" class="h30">
-      <span class="label">TÉRMINO DA PRESTAÇÃO</span>
+
+      <span class="label">
+        TÉRMINO DA PRESTAÇÃO
+      </span>
 
       <span class="value">
-        {{#if fimPrestacao}}
-          {{fimPrestacao}}
-        {{else}}
-          &nbsp;
-        {{/if}}
+        {{municipio_fim}} - {{uf_fim}}
       </span>
+
     </td>
 
   </tr>
 
 </table>
 
-  <table>
-    <tr>
-      <td style="width:50%;" class="h55">
-        <span class="label">REMETENTE</span>
-        <span class="value bold">{{remetente.nome}}</span>
-        <span class="value">{{remetente.endereco}}</span>
-        <span class="value">{{remetente.bairro}}</span>
-        <span class="value">{{remetente.municipio}} - {{remetente.uf}} CEP {{remetente.cep}}</span>
-        <span class="value">CNPJ/CPF {{remetente.documento}} - IE {{remetente.ie}}</span>
-      </td>
-
-      <td style="width:50%;" class="h55">
-        <span class="label">DESTINATÁRIO</span>
-        <span class="value bold">{{destinatario.nome}}</span>
-        <span class="value">{{destinatario.endereco}}</span>
-        <span class="value">{{destinatario.bairro}}</span>
-        <span class="value">{{destinatario.municipio}} - {{destinatario.uf}} CEP {{destinatario.cep}}</span>
-        <span class="value">CNPJ/CPF {{destinatario.documento}} - IE {{destinatario.ie}}</span>
-      </td>
-    </tr>
-
-    <tr>
-      <td style="width:50%;" class="h55">
-        <span class="label">EXPEDIDOR</span>
-        <span class="value bold">{{expedidor.nome}}</span>
-        <span class="value">{{expedidor.endereco}}</span>
-        <span class="value">{{expedidor.bairro}}</span>
-        <span class="value">{{expedidor.municipio}} - {{expedidor.uf}} CEP {{expedidor.cep}}</span>
-        <span class="value">CNPJ/CPF {{expedidor.documento}} - IE {{expedidor.ie}}</span>
-      </td>
-
-      <td style="width:50%;" class="h55">
-        <span class="label">RECEBEDOR</span>
-        <span class="value bold">{{recebedor.nome}}</span>
-        <span class="value">{{recebedor.endereco}}</span>
-        <span class="value">{{recebedor.bairro}}</span>
-        <span class="value">{{recebedor.municipio}} - {{recebedor.uf}} CEP {{recebedor.cep}}</span>
-        <span class="value">CNPJ/CPF {{recebedor.documento}} - IE {{recebedor.ie}}</span>
-      </td>
-    </tr>
-  </table>
-
-  <table>
-    <tr>
-      <td colspan="4">
-        <span class="label">TOMADOR DO SERVIÇO</span>
-        <span class="value bold">{{tomador.nome}}</span>
-        <span class="value">{{tomador.endereco}}</span>
-        <span class="value">{{tomador.municipio}} - {{tomador.uf}} CEP {{tomador.cep}}</span>
-        <span class="value">CNPJ/CPF {{tomador.documento}} - IE {{tomador.ie}}</span>
-        <span class="value">PAÍS {{tomador.pais}} - FONE {{tomador.fone}}</span>
-      </td>
-    </tr>
-  </table>
-
-
-  <table>
-    <tr class="h30">
-      <td colspan="4"  >
-        <span class="label">PRODUTO PREDOMINANTE</span>
-        <span class="value">{{carga.proPred}}</span>
-      </td>
-    <td colspan="2">
-        <span class="label">OUTRAS CARACTERÍSTICAS DA CARGA</span>
-        <span class="value">{{carga.proPred}}</span>
- 
-    </td>
-      <td colspan="2">
-        <span class="label">VALOR TOTAL MERCADORIA</span>
-        <span class="value center bold">{{carga.vCarga}}</span>
-      </td>
-    </tr>
-    </table>
 <table>
-    <tr class="h40">
-      <td colspan="4">
-        <span class="label">TP MED /UN. MED</span>
-        <span class="value center">{{carga.pesoBruto}}</span>
-      </td>
 
-      <td  colspan="4">
-        <span class="label">TP MED /UN. MED</span>
-        <span class="value center">{{carga.pesoBase}}</span>
-      </td>
+  <tr>
 
-      <td colspan="4">
-        <span class="label">TP MED /UN. MED</span>
-        <span class="value center">{{carga.pesoCubado}}</span>
-      </td>
-<td colspan="3">
-        <span class="label">CUBAGEM(M3)</span>
-        <span class="value center">{{carga.pesoCubado}}</span>
-      </td>
-<td colspan="3">
-        <span class="label">QTDE(VOL)</span>
-        <span class="value center">{{carga.pesoCubado}}</span>
-      </td>
-    <td colspan="16">
-<table>
- <tr class="h10" >  
-        <td><span class="label">NOME DA SEGURADORA</span></td>
- </tr>
-</table>
-<table>
-    <tr class="h30">
- <td>
-
-        <span class="label">RESPONSÁVEL</span>
- </td>
- <td>
-
-        <span class="label">NÚMERO DA APOLICE</span>
- </td>
- <td>
-        <span class="label">NÚMERO DA AVERBAÇÃO</span>
- </td></tr>
-  </table>
-    </td>
-    </tr>
-  </table>
+  <td style="width:50%;" class="h55">
 
 
+  <div style="display:flex; gap:10px;">
 
-  <div class="section">COMPONENTES DO VALOR DA PRESTAÇÃO DO SERVIÇO</div>
+    <div style="flex:1;">
 
-  <table >
-    <tr class="h80">
-      <td>
-        <span class="label">NOME</span>
-        <span class="value center">VALOR</span>
-      </td>
- <td>
-        <span class="label">NOME</span>
-        <span class="value center">VALOR</span>
-      </td>
- <td>
-        <span class="label">NOME</span>
-        <span class="value center">VALOR</span>
-      </td>
+      <span class="value">
+        <span class="bold">REMETENTE:</span>
+        {{remetente.nome}}
+      </span>
 
+      <span class="value">
+        <span class="bold">ENDEREÇO:</span>
+        {{remetente.endereco.linha1}}
+      </span>
 
- <td>
+      <span class="value">
+        <span class="bold">MUNICÍPIO:</span>
+        {{remetente.endereco.municipio}} - {{remetente.endereco.uf}}
+      </span>
 
-  <table>
-      <tr class="h40">
-<td>
-        <span class="label">VALOR TOTAL SERVIÇO</span>
-        <span class="value center bold">{{valores.totalServico}}</span>
-        </td>
-      </tr>
+      <span class="value">
+        <span class="bold">CNPJ/CPF:</span>
+        {{remetente.documento}}
+      </span>
 
-      <tr class="h40">
-      <td>
-        <span class="label">VALOR A RECEBER</span>
-        <span class="value center bold">{{valores.valorReceber}}</span>
-        </td>
-      </tr>
-</table>
+      <span class="value">
+        <span class="bold">PAÍS:</span>
+        {{remetente.endereco.pais}}
+      </span>
+
+    </div>
+
+    <div style="flex:1;">
+
+      <span class="value">
+        <span class="bold">CEP:</span>
+        {{remetente.endereco.cep}}
+      </span>
+
+      <span class="value">
+        <span class="bold">INSCRIÇÃO ESTADUAL:</span>
+        {{remetente.ie}}
+      </span>
+
+      <span class="value">
+        <span class="bold">FONE:</span>
+        {{remetente.fone}}
+      </span>
+
+    </div>
+
+  </div>
+
 </td>
-    </tr>
-  </table>
 
-  <div class="section">INFORMAÇÕES RELATIVAS AO IMPOSTO</div>
+<td style="width:50%;" class="h55">
 
-  <table>
-    <tr class="h40">
-      <td>
-        <span class="label">SITUAÇÃO TRIBUTÁRIA</span>
-        <span class="value">{{imposto.cst}}</span>
-      </td>
 
-      <td>
-        <span class="label">BASE CÁLCULO</span>
-        <span class="value center">{{imposto.baseCalculo}}</span>
-      </td>
+  <div style="display:flex; gap:10px;">
 
-      <td>
-        <span class="label">ALÍQ ICMS</span>
-        <span class="value center">{{imposto.pICMS}}%</span>
-      </td>
+    <div style="flex:1;">
 
-      <td>
-        <span class="label">VALOR ICMS</span>
-        <span class="value center bold">{{imposto.valor}}</span>
-      </td>
-  <td>
-        <span class="label">% RED. BC ICMS</span>
-        <span class="value center bold">{{imposto.valor}}</span>
-      </td>
-    </tr>
-  </table>
+      <span class="value">
+        <span class="bold">DESTINATÁRIO:</span>
+        {{destinatario.nome}}
+      </span>
 
-  <div class="section">DOCUMENTOS ORIGINÁRIOS</div>
+      <span class="value">
+        <span class="bold">ENDEREÇO:</span>
+        {{destinatario.endereco.linha1}}
+      </span>
 
-  <table>
-    <tr class="h97">
-      <td >
-          <div style="margin-bottom:4px;">
-            <span class="bold">{{this.tipo}}</span>
-            <span class="mono">{{this.chave}}</span>
-            {{this.serie}}/{{this.nro}}
-          </div>
-      </td>
- <td >
-          <div style="margin-bottom:4px;">
-            <span class="bold">{{this.tipo}}</span>
-            <span class="mono">{{this.chave}}</span>
-            {{this.serie}}/{{this.nro}}
-          </div>
-      </td>
-    </tr>
-  </table>
+      <span class="value">
+        <span class="bold">MUNICÍPIO:</span>
+        {{destinatario.endereco.municipio}} - {{destinatario.endereco.uf}}
+      </span>
 
-  <div class="section">OBSERVAÇÕES</div>
+      <span class="value">
+        <span class="bold">CNPJ/CPF:</span>
+        {{destinatario.documento}}
+      </span>
 
-  <table>
-    <tr>
-      <td class="h40">
-        <span class="value">{{obs}}</span>
-      </td>
-    </tr>
-  </table>
+      <span class="value">
+        <span class="bold">PAÍS:</span>
+        {{destinatario.endereco.pais}}
+      </span>
 
-  <div class="section">DADOS ESPECÍFICOS DO MODAL RODOVIÁRIO</div>
+    </div>
 
-  <table>
-    <tr class="h40">
-      <td colspan="4">
-        <span class="label">RNTRC DA EMPRESA</span>
-        <span class="value">{{rntrc}}</span>
-      </td>
+    <div style="flex:1;">
 
-      <td  colspan="4">
-        <span class="label">CIOT</span>
-        <span class="value">{{ciot}}</span>
-      </td>
+      <span class="value">
+        <span class="bold">CEP:</span>
+        {{destinatario.endereco.cep}}
+      </span>
 
-      <td colspan="2">
-        <span class="label">LOTAÇÃO</span>
-        <span class="value">{{lotacao}}</span>
-      </td>
-      <td colspan="4">
-        <span class="label">DATA PREVISTA DE ENTREGA</span>
-      </td>
- <td colspan="10">
-        <span class="label">ESTE CONHECIMENTO DE TRANSPORTE ATENDE
-À LEGISLAÇÃO DE TRANSPORTE RODOVIÁRIO EM VIGOR</span>
-      </td>
+      <span class="value">
+        <span class="bold">INSCRIÇÃO ESTADUAL:</span>
+        {{destinatario.ie}}
+      </span>
 
-    </tr>
-  </table>
+      <span class="value">
+        <span class="bold">FONE:</span>
+        {{destinatario.fone}}
+      </span>
 
-  <table>
+    </div>
+
+  </div>
+
+</td>
+  </tr>
+
+<tr>
+
+  <td style="width:50%;" class="h55">
+
+
+    <div style="display:flex; gap:10px;">
+
+      <div style="flex:1;">
+
+        <span class="value">
+          <span class="bold">EXPEDIDOR:</span>
+          {{expedidor.nome}}
+        </span>
+
+        <span class="value">
+          <span class="bold">ENDEREÇO:</span>
+          {{expedidor.endereco.linha1}}
+        </span>
+
+        <span class="value">
+          <span class="bold">MUNICÍPIO:</span>
+          {{expedidor.endereco.municipio}} - {{expedidor.endereco.uf}}
+        </span>
+
+        <span class="value">
+          <span class="bold">CNPJ/CPF:</span>
+          {{expedidor.documento}}
+        </span>
+
+        <span class="value">
+          <span class="bold">PAÍS:</span>
+          {{expedidor.endereco.pais}}
+        </span>
+
+      </div>
+
+      <div style="flex:1;">
+
+        <span class="value">
+          <span class="bold">CEP:</span>
+          {{expedidor.endereco.cep}}
+        </span>
+
+        <span class="value">
+          <span class="bold">INSCRIÇÃO ESTADUAL:</span>
+          {{expedidor.ie}}
+        </span>
+
+        <span class="value">
+          <span class="bold">FONE:</span>
+          {{expedidor.fone}}
+        </span>
+
+      </div>
+
+    </div>
+
+  </td>
+
+  <td style="width:50%;" class="h55">
+
+
+    <div style="display:flex; gap:10px;">
+
+      <div style="flex:1;">
+
+        <span class="value">
+          <span class="bold">RECEBEDOR:</span>
+          {{recebedor.nome}}
+        </span>
+
+        <span class="value">
+          <span class="bold">ENDEREÇO:</span>
+          {{recebedor.endereco.linha1}}
+        </span>
+
+        <span class="value">
+          <span class="bold">MUNICÍPIO:</span>
+          {{recebedor.endereco.municipio}} - {{recebedor.endereco.uf}}
+        </span>
+
+        <span class="value">
+          <span class="bold">CNPJ/CPF:</span>
+          {{recebedor.documento}}
+        </span>
+
+        <span class="value">
+          <span class="bold">PAÍS:</span>
+          {{recebedor.endereco.pais}}
+        </span>
+
+      </div>
+
+      <div style="flex:1;">
+
+        <span class="value">
+          <span class="bold">CEP:</span>
+          {{recebedor.endereco.cep}}
+        </span>
+
+        <span class="value">
+          <span class="bold">INSCRIÇÃO ESTADUAL:</span>
+          {{recebedor.ie}}
+        </span>
+
+        <span class="value">
+          <span class="bold">FONE:</span>
+          {{recebedor.fone}}
+        </span>
+
+      </div>
+
+    </div>
+
+  </td>
+
+</tr></table>
+
+<table>
+
+ <tr>
+
+  <td colspan="4">
+
+        <div style="display:flex; gap:10px;">
+
+      <div style="flex:1;">
+
+        <span class="value">
+          <span class="bold">TOMADOR DO SERVIÇO:</span>
+          {{tomador.nome}}
+        </span>
+
+        <span class="value">
+          <span class="bold">ENDEREÇO:</span>
+          {{tomador.endereco.linha1}}
+        </span>
+
+        <span class="value">
+          <span class="bold">CNPJ/CPF:</span>
+          {{tomador.documento}}
+        </span>
+
+      </div>
+
+      <div style="flex:1;">
+
+        <span class="value">
+          <span class="bold">INSCRIÇÃO ESTADUAL:</span>
+          {{tomador.ie}}
+        </span>
+
+        <span class="value">
+          <span class="bold">MUNICÍPIO:</span>
+          {{tomador.endereco.municipio}}
+        </span>
+
+        <span class="value">
+          <span class="bold">UF:</span>
+          {{tomador.endereco.uf}}
+        </span>
+
+      </div>
+
+      <div style="flex:1;">
+
+        <span class="value">
+          <span class="bold">PAÍS:</span>
+          {{tomador.endereco.pais}}
+        </span>
+
+        <span class="value">
+          <span class="bold">CEP:</span>
+          {{tomador.endereco.cep}}
+        </span>
+
+        <span class="value">
+          <span class="bold">FONE:</span>
+          {{tomador.fone}}
+        </span>
+
+      </div>
+
+    </div>
+
+  </td>
+
+</tr></table>
+
+<table>
+
+  <tr class="h30">
+
+    <td colspan="4">
+
+      <span class="label">
+        PRODUTO PREDOMINANTE
+      </span>
+
+      <span class="value">
+        {{carga.produtoPredominante}}
+      </span>
+
+    </td>
+
+    <td colspan="2">
+
+      <span class="label">
+        OUTRAS CARACTERÍSTICAS DA CARGA
+      </span>
+
+      <span class="value">
+        {{carga.outrasCaracteristicas}}
+      </span>
+
+    </td>
+
+    <td colspan="2">
+
+      <span class="label">
+        VALOR TOTAL MERCADORIA
+      </span>
+
+      <span class="value center bold">
+        {{carga.valorCarga}}
+      </span>
+
+    </td>
+
+  </tr>
+
+</table>
+
+<table>
+
   <tr class="h40">
 
-      <td colspan="7">
+    <td colspan="4">
 
-  <div class="section">USO EXCLUSIVO DO EMISSOR DO CT-E</div>
-        <span class="value tiny">
-          Este documento foi emitido conforme legislação vigente.
-        </span>
-      </td>
+      <span class="label">
+        PESO BRUTO (KG)
+      </span>
 
-      <td colspan="3">
+      <span class="value center">
+        {{carga.pesoBruto}}
+      </span>
 
-  <div class="section">RESERVADO AO FISCO</div>
-      </td>
-</tr>
-  </table>
-  <br>
-<div class="dashed-line-horizontal"></div>
-<br>
-<div class="section">
-          DECLARO QUE RECEBI OS VOLUMES DESTE CONHECIMENTO
-          EM PERFEITO ESTADO PELO QUE DOU POR CUMPRIDO
-          O PRESENTE CONTRATO DE TRANSPORTE
-        </div>
-  <table>
-    <tr class="h80">
-   <td colspan="4">
-   <table>
-    <tr class="h40">
-      <td >
-        <span class="label">NOME</span>
-      </td>
-</tr>
-
-    <tr class="h40">
-      <td >
-        <span class="label">RG</span>
-      </td>
-
-</tr>
-  </table>
     </td>
- <td colspan="4">
-        <span class="label">ASSINATURA / CARIMBO</span>
-      </td>
+
+    <td colspan="4">
+
+      <span class="label">
+        PESO BASE (KG)
+      </span>
+
+      <span class="value center">
+        {{carga.pesoBase}}
+      </span>
+
+    </td>
+
+    <td colspan="4">
+
+      <span class="label">
+        PESO CUBADO (KG)
+      </span>
+
+      <span class="value center">
+        {{carga.pesoCubado}}
+      </span>
+
+    </td>
+
+    <td colspan="3">
+
+      <span class="label">
+        CUBAGEM(M3)
+      </span>
+
+      <span class="value center">
+        {{carga.cubagem}}
+      </span>
+
+    </td>
+
+    <td colspan="3">
+
+      <span class="label">
+        QTDE(VOL)
+      </span>
+
+      <span class="value center">
+        {{carga.quantidadeVolumes}}
+      </span>
+
+    </td>
+
+    <td colspan="16">
+
+      <table>
+
+        <tr class="h10">
+          <td>
+            <span class="label">
+              NOME DA SEGURADORA
+            </span>
+
+            <span class="value">
+              {{seguro.seguradora}}
+            </span>
+          </td>
+        </tr>
+
+      </table>
+
+      <table>
+
+        <tr class="h30">
+
+          <td>
+
+            <span class="label">
+              RESPONSÁVEL
+            </span>
+
+            <span class="value">
+              {{seguro.responsavel}}
+            </span>
+
+          </td>
+
+          <td>
+
+            <span class="label">
+              NÚMERO DA APOLICE
+            </span>
+
+            <span class="value">
+              {{seguro.apolice}}
+            </span>
+
+          </td>
+
+          <td>
+
+            <span class="label">
+              NÚMERO DA AVERBAÇÃO
+            </span>
+
+            <span class="value">
+              {{seguro.averbacao}}
+            </span>
+
+          </td>
+
+        </tr>
+
+      </table>
+
+  </td>
+
+  </tr>
+
+</table>
+
+<div class="section">
+  COMPONENTES DO VALOR DA PRESTAÇÃO DO SERVIÇO
+</div>
+
+<table>
+
+ <tr class="h80">
+
+  <td>
+
+    <div style="display:flex;">
+
+      <div style="flex:1;">
+
+        <span class="label">
+          NOME
+        </span>
+
+        <span class="value center">
+          {{#if valores.componentes.[0].nome}}
+            {{valores.componentes.[0].nome}}
+          {{else}}
+            &nbsp;
+          {{/if}}
+        </span>
+
+      </div>
+
+      <div style="flex:1;">
+
+        <span class="label">
+          VALOR
+        </span>
+
+        <span class="value center">
+          {{#if valores.componentes.[0].valor}}
+            {{valores.componentes.[0].valor}}
+          {{else}}
+            &nbsp;
+          {{/if}}
+        </span>
+
+      </div>
+
+    </div>
+
+  </td>
+
+  <td>
+
+    <div style="display:flex;">
+
+      <div style="flex:1;">
+
+        <span class="label">
+          NOME
+        </span>
+
+        <span class="value center">
+          {{#if valores.componentes.[1].nome}}
+            {{valores.componentes.[1].nome}}
+          {{else}}
+            &nbsp;
+          {{/if}}
+        </span>
+
+      </div>
+
+      <div style="flex:1;">
+
+        <span class="label">
+          VALOR
+        </span>
+
+        <span class="value center">
+          {{#if valores.componentes.[1].valor}}
+            {{valores.componentes.[1].valor}}
+          {{else}}
+            &nbsp;
+          {{/if}}
+        </span>
+
+      </div>
+
+    </div>
+
+  </td>
+
+  <td>
+
+    <div style="display:flex;">
+
+      <div style="flex:1;">
+
+        <span class="label">
+          NOME
+        </span>
+
+        <span class="value center">
+          {{#if valores.componentes.[2].nome}}
+            {{valores.componentes.[2].nome}}
+          {{else}}
+            &nbsp;
+          {{/if}}
+        </span>
+
+      </div>
+
+      <div style="flex:1;">
+
+        <span class="label">
+          VALOR
+        </span>
+
+        <span class="value center">
+          {{#if valores.componentes.[2].valor}}
+            {{valores.componentes.[2].valor}}
+          {{else}}
+            &nbsp;
+          {{/if}}
+        </span>
+
+      </div>
+
+    </div>
+
+  </td>
+
+  <td>
+
+  <table>
+
+        <tr class="h40">
+
+          <td>
+
+            <span class="label center">
+              VALOR TOTAL SERVIÇO
+            </span>
+
+            <span class="value center bold">
+              {{valores.valor_total}}
+            </span>
+
+          </td>
+
+        </tr>
+
+        <tr class="h40">
+
+          <td>
+
+            <span class="label center">
+              VALOR A RECEBER
+            </span>
+
+            <span class="value center bold">
+              {{valores.valor_receber}}
+            </span>
+
+          </td>
+
+        </tr>
+
+      </table>
+
+    </td>
+
+  </tr>
+
+</table>
+
+<div class="section">
+  INFORMAÇÕES RELATIVAS AO IMPOSTO
+</div>
+
+<table>
+
+  <tr class="h40">
+
+    <td>
+
+      <span class="label">
+        SITUAÇÃO TRIBUTÁRIA
+      </span>
+
+      <span class="value center">
+        {{imposto.cst}}
+      </span>
+
+    </td>
+
+    <td>
+
+      <span class="label">
+        BASE CÁLCULO
+      </span>
+
+      <span class="value center">
+        {{imposto.bc}}
+      </span>
+
+    </td>
+
+    <td>
+
+      <span class="label">
+        ALÍQ ICMS
+      </span>
+
+      <span class="value center">
+        {{imposto.aliquota}}%
+      </span>
+
+    </td>
+
+    <td>
+
+      <span class="label">
+        VALOR ICMS
+      </span>
+
+      <span class="value center bold">
+        {{imposto.valor}}
+      </span>
+
+    </td>
+
+    <td>
+
+      <span class="label">
+        % RED. BC ICMS
+      </span>
+
+      <span class="value center bold">
+        {{imposto.reducao}}
+      </span>
+
+    </td>
+
+  </tr>
+
+</table>
+
+<div class="section">
+  DOCUMENTOS ORIGINÁRIOS
+</div>
+
+<table class="h97">
+  <tr>
+
+    <td style="width:50%;">
+      <div style="display:flex;">
+        <div style="flex:1;">
+          <span class="label">TIPO DOC</span>
+          <span class="value center bold">{{documentos.nfes.[0].tipo}}</span>
+        </div>
+        <div style="flex:2;">
+          <span class="label">CNPJ/CHAVE</span>
+          <span class="value center mono">{{documentos.nfes.[0].chave}}</span>
+        </div>
+        <div style="flex:1;">
+          <span class="label">SÉRIE/NRO. DOCUMENTO</span>
+          <span class="value center">{{documentos.nfes.[0].serie}}/{{documentos.nfes.[0].numero}}</span>
+        </div>
+      </div>
+    </td>
+
+    <td style="width:50%;">
+      <div style="display:flex;">
+        <div style="flex:1;">
+          <span class="label">TIPO DOC</span>
+          <span class="value center bold">{{documentos.nfes.[1].tipo}}</span>
+        </div>
+        <div style="flex:2;">
+          <span class="label">CNPJ/CHAVE</span>
+          <span class="value center mono">{{documentos.nfes.[1].chave}}</span>
+        </div>
+        <div style="flex:1;">
+          <span class="label">SÉRIE/NRO. DOCUMENTO</span>
+          <span class="value center">{{documentos.nfes.[1].serie}}/{{documentos.nfes.[1].numero}}</span>
+        </div>
+      </div>
+    </td>
+
+  </tr>
+</table>
+
+<div class="section">
+  OBSERVAÇÕES
+</div>
+
+<table>
+
+  <tr>
+
+    <td class="h40">
+
+      <span class="value">
+        {{observacoes.contribuinte}}
+      </span>
+
+    </td>
+
+  </tr>
+
+</table>
+
+<div class="section">
+  DADOS ESPECÍFICOS DO MODAL RODOVIÁRIO
+</div>
+
+<table>
+
+  <tr class="h40">
+
+    <td colspan="4">
+
+      <span class="label">
+        RNTRC DA EMPRESA
+      </span>
+
+      <span class="value">
+        {{rodoviario.rntrc}}
+      </span>
+
+    </td>
+
+    <td colspan="4">
+
+      <span class="label">
+        CIOT
+      </span>
+
+      <span class="value">
+        {{rodoviario.ciot}}
+      </span>
+
+    </td>
+
+    <td colspan="2">
+
+      <span class="label">
+        LOTAÇÃO
+      </span>
+
+      <span class="value">
+        {{rodoviario.lotacao}}
+      </span>
+
+    </td>
+
+    <td colspan="4">
+
+      <span class="label">
+        DATA PREVISTA DE ENTREGA
+      </span>
+
+      <span class="value">
+        {{rodoviario.dataEntrega}}
+      </span>
+
+    </td>
+
+    <td colspan="10">
+
+      <span class="label center">
+        ESTE CONHECIMENTO DE TRANSPORTE
+        ATENDE À LEGISLAÇÃO DE TRANSPORTE
+        RODOVIÁRIO EM VIGOR
+      </span>
+
+    </td>
+
+  </tr>
+
+</table>
+
+<table>
+
+  <tr class="h40">
+
+    <td colspan="7">
+
+      <div class="section">
+        USO EXCLUSIVO DO EMISSOR DO CT-E
+      </div>
+
+      <span class="value tiny">
+        Este documento foi emitido conforme legislação vigente.
+      </span>
+
+    </td>
+
+    <td colspan="3">
+
+      <div class="section">
+        RESERVADO AO FISCO
+      </div>
+
+    </td>
+
+  </tr>
+
+</table>
+
+<br>
+
+<div class="dashed-line-horizontal"></div>
+
+<br>
+
+<div class="section">
+  DECLARO QUE RECEBI OS VOLUMES DESTE CONHECIMENTO
+  EM PERFEITO ESTADO PELO QUE DOU POR CUMPRIDO
+  O PRESENTE CONTRATO DE TRANSPORTE
+</div>
+
+<table>
+
+  <tr class="h80">
+
+    <td colspan="4">
+
+      <table>
+
+        <tr class="h40">
+
+          <td>
+            <span class="label">
+              NOME
+            </span>
+          </td>
+
+        </tr>
+
+        <tr class="h40">
+
+          <td>
+            <span class="label">
+              RG
+            </span>
+          </td>
+
+        </tr>
+
+      </table>
+
+    </td>
+
+    <td colspan="4">
+
+      <span class="label">
+        ASSINATURA / CARIMBO
+      </span>
+
+    </td>
+
 <td colspan="5">
-        <span class="label">TÉRMINO DA PRESTAÇÃO - DATA/HORA</span>
 
-        <span class="label">INÍCIO DA PRESTAÇÃO - DATA/HORA</span>
-      </td>
- <td colspan="2">
-        <span class="label">CT-E</span>
+  <span class="label">
+    TÉRMINO DA PRESTAÇÃO - DATA/HORA
+  </span>
+<br>
+  <span class="value" style="margin-top:2px;">
+    ____/____/______  ____:____
+  </span>
+<br>
+<br>
+  <span class="label">
+    INÍCIO DA PRESTAÇÃO - DATA/HORA
+  </span>
+<br>
 
-      </td>
-  
-    </tr>
-  </table>
+  <span class="value" style="margin-top:2px;">
+    ____/____/______  ____:____
+  </span>
 
-  
+</td>
+   <td colspan="2" class="center" style="vertical-align: middle;">
+      <div style="font-size: 11pt; font-weight: bold; margin-bottom: 2px;">CT-E</div>
+      <div class="value bold" style="font-size: 7pt;">Nº {{numero}}</div>
+      <div class="value bold" style="font-size: 7pt;">Série {{serie}}</div>
+    </td>
+  </tr>
+
+</table>
+
 <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
 
-  <script>
-    var chaveBruta = "{{chave}}".replace(/[^0-9]/g, '');
+<script>
 
-    if(chaveBruta) {
-      JsBarcode("#barcode", chaveBruta, {
-        format: "CODE128",
-        displayValue: false,
-        height: 30,
-        width: 1.1,
-        margin: 3,
-        background: "transparent"
-      });
-    }
-  </script>
+  var chaveBruta = "{{chave}}".replace(/[^0-9]/g, '');
+  if(chaveBruta) {
+
+    JsBarcode("#barcode", chaveBruta, {
+      format: "CODE128",
+      displayValue: false,
+      height: 30,
+      width: 1.1,
+      margin: 3,
+      background: "transparent"
+    });
+  }
+
+</script>
+
 </div>
 </body>
 </html>
