@@ -480,7 +480,7 @@ function getTemplateData(nfe, xml = '') {
 
     operacao: call(() => nfe.tipoOperacao()),
     natureza_operacao: call(() => nfe.naturezaOperacao()),
-
+    informacoes_fisco: extrairTag(xml, 'infAdFisco') || '',
     numero: call(() => nfe.nrNota()),
     serie: call(() => nfe.serie()),
 
