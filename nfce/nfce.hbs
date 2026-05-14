@@ -3,39 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <style>
-    {{css}}
+    {{{css}}}
     </style>
 </head>
-<body>
+<body id="nfce-body">
 
-    <div class="text-center">
-        <span class="emitente-nome bold">{{emitente.nome}}</span>
-        CNPJ:{{emitente.cnpj}} IE:{{emitente.ie}}<br>
-        {{emitente.endereco}}<br>
-        {{emitente.municipio}}-{{emitente.uf}} - {{emitente.fone}}
+    <div class="text-center emitente-header">
+        <span class="emitente-nome bold">{{emitente.nome}}</span><br>
+        CNPJ:{{emitente.inscricao_nacional}} IE:{{emitente.ie}}<br>
+        {{emitente.logradouro}},{{emitente.numero}},{{emitente.bairro}}. CEP:{{emitente.cep}}.<br>
+        {{emitente.municipio}}-{{emitente.uf}} - {{emitente.telefone}}
     </div>
 
     <div class="dashed-line"></div>
 
-    <div class="text-center bold">
-        DANFE NFC-e<br>
-        Documento Auxiliar da Nota Fiscal de Consumidor Eletrônica
-    </div>
-    <div class="text-center" style="font-size: 6.5pt;">
-        NFC-e não permite aproveitamento de crédito de ICMS
-    </div>
+    <div class="text-center bold" style="font-size: 9pt;">DANFE NFC-e</div>
+    <div class="text-center" style="font-size: 7pt;">Documento Auxiliar da Nota Fiscal de Consumidor Eletrônica</div>
+    <div class="text-center" style="font-size: 6pt;">NFC-e não permite aproveitamento de crédito de ICMS</div>
 
     <div class="dashed-line"></div>
 
     <table>
         <thead>
             <tr>
-                <th width="15%">CÓDIGO</th>
-                <th width="35%">DESCRIÇÃO</th>
-                <th width="10%" class="text-right">QT</th>
-                <th width="10%" class="text-center">UN</th>
-                <th width="15%" class="text-right">UNIT</th>
-                <th width="15%" class="text-right">TOTAL</th>
+                <th>CÓD</th>
+                <th>DESCRIÇÃO</th>
+                <th>QTD</th>
+                <th>UN</th>
+                <th>VL UN</th>
+                <th>VL TOTAL</th>
             </tr>
         </thead>
         <tbody>
@@ -43,10 +39,10 @@
             <tr>
                 <td>{{codigo}}</td>
                 <td>{{descricao}}</td>
-                <td class="text-right">{{qtd}}</td>
-                <td class="text-center">{{un}}</td>
-                <td class="text-right">{{valor_unit}}</td>
-                <td class="text-right">{{valor_total}}</td>
+                <td>{{qtd}}</td>
+                <td>{{un}}</td>
+                <td>{{valor_unit}}</td>
+                <td>{{valor_total}}</td>
             </tr>
             {{/each}}
         </tbody>
@@ -60,24 +56,38 @@
             <span>{{qtd_total_itens}}</span>
         </div>
         <div class="total-row">
-            <span>Total de Produtos</span>
+            <span>Valor Total dos Produtos</span>
             <span>R$ {{valor_total_produtos}}</span>
         </div>
-        {{#if valor_desconto}}
         <div class="total-row">
-            <span>Descontos</span>
-            <span>R$ {{valor_desconto}}</span>
+            <span>Total do Desconto</span>
+            <span>R$ {{total_desconto}}</span>
         </div>
-        {{/if}}
+        <div class="total-row">
+            <span>Total do Frete</span>
+            <span>R$ {{total_frete}}</span>
+        </div>
         <div class="total-row bold">
-            <span>VALOR TOTAL</span>
+            <span>VALOR TOTAL DA NOTA</span>
             <span>R$ {{valor_total_nota}}</span>
         </div>
     </div>
 
     <div class="dashed-line"></div>
 
-    <div class="bold">FORMA DE PAGAMENTO <span style="float: right;">VALOR PAGO</span></div>
+    <div class="total-container">
+        <div class="total-row">
+            <span>Informação dos Tributos Totais Incidentes</span>
+            <span>R$ {{valor_total_tributos}}</span>
+        </div>
+    </div>
+
+    <div class="dashed-line"></div>
+
+    <div class="pagamento-header">
+        <span>FORMA DE PAGAMENTO</span>
+        <span>VALOR PAGO</span>
+    </div>
     {{#each pagamentos}}
     <div class="total-row">
         <span>{{forma}}</span>
@@ -87,58 +97,45 @@
 
     <div class="dashed-line"></div>
 
-    <div class="text-center info-fiscal">
-        Consulte pela Chave de Acesso em:<br>
-        <span style="font-size: 6pt;">http://www.sefaz.go.gov.br/nfce/consulta</span><br>
-        <div class="chave-acesso">{{chave}}</div>
+    <div class="text-center mensagem-fiscal">
+        ÁREA DE MENSAGEM FISCAL<br>
+        Número {{numero}} Série {{serie}} {{data_emissao}} - Via Consumidor
     </div>
 
     <div class="dashed-line"></div>
 
-    <div class="text-center">
-        CONSUMIDOR:<br>
+        <div class="text-center">
+        CONSUMIDOR<br>
         <span class="bold">{{destinatario.nome}}</span>
         {{#if destinatario.identificacao}}<br>{{destinatario.identificacao}}{{/if}}
     </div>
 
-    <div class="dashed-line"></div>
 
-    <div class="text-center info-fiscal">
-        NFC-e nº {{numero}} Série {{serie}}<br>
-        Data de Emissão: {{data_emissao}}<br>
+        <div class="dashed-line"></div>
+
+    <div class="info-adicional">
+        <span class="bold">INFORMAÇÃO ADICIONAL</span><br>
+        {{informacoes_complementares}}
+    </div>
+
+    <div class="dashed-line"></div>
+<div class="text-center info-fiscal">
+        Consulte pela Chave de Acesso em<br>
+        {{#if url_consulta_qrcode}}
+        <span style="font-size: 6pt;">{{url_consulta_qrcode}}</span><br>
+        {{/if}}
+        <div class="chave-label">CHAVE DE ACESSO</div>
+        <div class="chave-acesso">{{chave}}</div>
+    </div>
+<div class="text-center info-fiscal">
         Protocolo de Autorização: {{protocolo}}<br>
         {{data_protocolo}}
     </div>
 
-    <div class="qrcode-container">
-        <div id="qrcode"></div>
-        <div style="font-size: 6pt; margin-top: 4px;">VERSÃO 4.00</div>
-    </div>
+
+
 
     <div class="dashed-line"></div>
-
-    <div class="info-fiscal">
-        <span class="bold">INFORMAÇÃO ADICIONAL:</span><br>
-        {{informacoes_complementares}}
-    </div>
-
-    <div class="text-center bold" style="margin-top: 8px;">
-        AGRADECEMOS A PREFERENCIA! [cite: 16]
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script>
-        const qrContent = "{{qrCode}}";
-        if (qrContent) {
-            new QRCode(document.getElementById("qrcode"), {
-                text: qrContent,
-                width: 110,
-                height: 110,
-                colorDark : "#000000",
-                colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.M
-            });
-        }
-    </script>
+    <div id="qrcode-placeholder"></div>
 </body>
 </html>

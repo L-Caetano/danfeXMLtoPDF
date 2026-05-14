@@ -10,9 +10,14 @@
   "description": "",
   "dependencies": {
     "@nfewizard/danfe": "^1.0.2",
+    "atob": "^2.1.2",
     "danfe-simplificada": "^1.1.2",
+    "express": "^5.2.1",
     "html-pdf-node": "^1.0.8",
     "node-sped-nfe": "^1.2.52",
+    "pdf-lib": "^1.17.1",
+    "puppeteer": "^24.43.1",
+    "qrcode": "^1.5.4",
     "webdanfe": "^1.0.0"
   }
 }
